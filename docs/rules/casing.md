@@ -1,0 +1,38 @@
+# filenames-simple/casing
+This rule make sure the filename follows the naming convention.
+
+## Configuration example
+```json
+{
+  "plugins": [
+    "filenames-simple"
+  ],
+  "rules": {
+    "filenames-simple/casing": [
+      "error",
+      {
+        "rule": "CamelCase",
+        "excepts": ["index"]
+      }
+    ]
+  }
+}
+```
+
+## Available options
+### rule
+Specify the below naming convention or your regular expression syntax.  
+If you specify the regular expression, `^` at the beginning and `$` at the end of the expression are automatically completed.
+
+#### Naming convention presets
+* camelCase (lowerCamelCase)
+* kebab-case (hyphen-case, default)
+* PascalCase (UpperCamelCase)
+* snake_case (underscore_case)
+
+### excepts
+Specify filenames in regular expression syntax that ignores the above naming convention.  
+`^` at the beginning and `$` at the end of the expression are automatically completed.  
+This options accepts an array of strings.
+
+default value: `["index"]`
