@@ -1,0 +1,27 @@
+{
+  "normalCase": [
+    "normalcase",
+    "normal0case",
+    "normalcase0"
+  ],
+  "camelCase": [
+    "camelCase",
+    "camel0Case",
+    "camelCase0"
+  ],
+  "kebabCase": [
+    "kebab-case",
+    "kebab0-case",
+    "kebab-case0"
+  ],
+  "pascalCase": [
+    "PascalCase",
+    "Pascal0Case",
+    "PascalCase0"
+  ],
+  "snakeCase": [
+    "snake_case",
+    "snake0_case",
+    "snake_case0"
+  ]
+}
