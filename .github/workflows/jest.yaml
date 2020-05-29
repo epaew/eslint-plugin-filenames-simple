@@ -1,0 +1,42 @@
+name: Run Jest
+
+on:
+  pull_request: {}
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  jest:
+    name: Jest
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node:
+          - 10.x
+          - 12.x
+          - 14.x
+        eslint:
+          - 6
+          - 7
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Fetch yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Fetch yarn cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: ${{ runner.os }}-yarn-
+
+      - run: yarn install --frozen-lockfile
+      - run: yarn remove eslint && yarn add eslint@${{ matrix.eslint }}
+      - run: yarn test
