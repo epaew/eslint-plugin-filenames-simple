@@ -1,11 +1,20 @@
 {
   "name": "eslint-plugin-filenames-simple",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An ESLint plugin to check filenames with simple configuration",
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "filenames"
+  ],
+  "homepage": "https://github.com/epaew/eslint-plugin-filenames-simple",
   "repository": "git@github.com:epaew/eslint-plugin-filenames-simple",
   "license": "MIT",
   "author": "epaew <epaew.333@gmail.com>",
   "main": "dist/index.js",
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist/*",
