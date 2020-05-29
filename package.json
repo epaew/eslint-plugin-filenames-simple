@@ -9,6 +9,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist/*",
+    "eslint": "eslint --ext .js,.ts src",
+    "eslint:fix": "eslint --fix --ext .js,.ts src",
     "prepack": "npm-run-all clean build"
   },
   "devDependencies": {
