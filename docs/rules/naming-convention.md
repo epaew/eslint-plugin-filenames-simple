@@ -21,7 +21,7 @@ This rule make sure the filename follows the naming convention.
 
 ## Available options
 ### rule
-Specify the below naming convention or your regular expression syntax.  
+Specify one of the following naming conventions or your regular expression syntax.  
 If you specify the regular expression, `^` at the beginning and `$` at the end of the expression are automatically completed.
 
 #### Naming convention presets

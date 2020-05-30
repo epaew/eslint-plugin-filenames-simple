@@ -15,12 +15,14 @@ Modify your `.eslintrc` file to load the plugin and enable the rules.
     "filenames-simple"
   ],
   "rules": {
+    "filenames-simple/extname": ["error", "lowercase"],
     "filenames-simple/naming-convention": ["error", { "rule": "kebab-case" }]
   }
 }
 ```
 
 ## Available rules
+* [extname](./docs/rules/extname.md)
 * [naming convention](./docs/rules/naming-convention.md)
 
 ## LICENSE
