@@ -55,5 +55,8 @@ This plugin is inspired by [eslint-plugin-filenames](https://github.com/selaux/e
 * [naming-convention](./docs/rules/naming-convention.md)
 * [no-index](./docs/rules/no-index.md)
 
+## CHANGELOG
+[CHANGELOG](./CHANGELOG.md)
+
 ## LICENSE
 [MIT](./LICENSE)
