@@ -29,4 +29,6 @@ jobs:
           restore-keys: ${{ runner.os }}-yarn-
 
       - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - run: yarn upgrade --latest eslint-plugin-filename-simple
       - run: yarn eslint
