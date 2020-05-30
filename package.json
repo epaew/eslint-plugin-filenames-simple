@@ -18,6 +18,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist/*",
+    "console": "ts-node",
     "eslint": "eslint --ext .js,.ts src",
     "eslint:fix": "eslint --fix --ext .js,.ts src",
     "prepack": "npm-run-all eslint test clean build",
@@ -38,6 +39,7 @@
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.0.0",
+    "ts-node": "^8.10.2",
     "typescript": "^3.9.3"
   },
   "peerDependencies": {
