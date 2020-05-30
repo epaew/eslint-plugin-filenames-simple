@@ -13,7 +13,12 @@ ruleTester.run('naming-convention', namingConvention, {
     {
       code: '',
       filename: 'camelCase.js',
-      errors: ["The filename must follow the rule: 'kebab-case'. Should rename to camel-case.js"],
+      errors: ["The filename must follow the rule: 'kebab-case'. Should rename to camel-case.js."],
+    },
+    {
+      code: '',
+      filename: '00001_chaos-Name.js',
+      errors: ["The filename must follow the rule: 'kebab-case'."],
     },
     {
       code: '',
