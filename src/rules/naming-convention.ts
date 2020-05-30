@@ -51,8 +51,10 @@ export const namingConvention: Rule.RuleModule = {
           const suggest = (() => {
             if (!presetCaseConverters[rule]) return null;
 
-            const name = [presetCaseConverters[rule](filename), ...rest].join('.');
-            return ` Should rename to ${name}`;
+            const alterName = presetCaseConverters[rule](filename) ?? '';
+            if (!ruleRegExp.test(alterName)) return null;
+
+            return ` Should rename to ${[alterName, ...rest].join('.')}.`;
           })();
           const message = `The filename must follow the rule: '${rule}'.${suggest ?? ''}`;
 
