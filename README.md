@@ -1,4 +1,9 @@
 # ESLint plugin filenames simple
+[![npm version](https://badge.fury.io/js/eslint-plugin-filenames-simple.svg)](https://badge.fury.io/js/eslint-plugin-filenames-simple)
+[![Build Status](https://github.com/epaew/eslint-plugin-filenames-simple/workflows/Run%20Jest/badge.svg)](https://github.com/epaew/eslint-plugin-filenames-simple/actions?query=workflow%3A%22Run+Jest%22+branch%3A%22master%22)
+[![Maintainability](https://api.codeclimate.com/v1/badges/964080f3d22b89b276d2/maintainability)](https://codeclimate.com/github/epaew/eslint-plugin-filenames-simple/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/964080f3d22b89b276d2/test_coverage)](https://codeclimate.com/github/epaew/eslint-plugin-filenames-simple/test_coverage)
+
 An ESLint plugin to check filenames with simple configuration.  
 This plugin is inspired by [eslint-plugin-filenames](https://github.com/selaux/eslint-plugin-filenames).
 

@@ -10,7 +10,7 @@ on:
 
 jobs:
   jest:
-    name: Jest
+    name: Jest w/ Node:${{ matrix.node }} ESLint:${{ matrix.eslint }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -40,4 +40,13 @@ jobs:
 
       - run: yarn install --frozen-lockfile
       - run: yarn remove eslint && yarn add eslint@${{ matrix.eslint }}
-      - run: yarn test
+
+      - name: yarn run test && report coverage
+        uses: paambaati/codeclimate-action@v2.6.0
+        env:
+          CC_TEST_REPORTER_ID: 03c045faa77d44bb865e441b9507cb2a6ee668a225962491ce40d37d6b297899
+        with:
+          coverageCommand: yarn test
+          coverageLocations: |
+            ${{ github.workspace }}/coverage/lcov.info:lcov
+          debug: true
