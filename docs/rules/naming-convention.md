@@ -1,4 +1,4 @@
-# filenames-simple/casing
+# filenames-simple/naming-convention
 This rule make sure the filename follows the naming convention.
 
 ## Configuration example
@@ -8,7 +8,7 @@ This rule make sure the filename follows the naming convention.
     "filenames-simple"
   ],
   "rules": {
-    "filenames-simple/casing": [
+    "filenames-simple/naming-convention": [
       "error",
       {
         "rule": "CamelCase",
