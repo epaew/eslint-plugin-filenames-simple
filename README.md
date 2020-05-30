@@ -15,13 +15,13 @@ Modify your `.eslintrc` file to load the plugin and enable the rules.
     "filenames-simple"
   ],
   "rules": {
-    "filenames-simple/casing": "error"
+    "filenames-simple/naming-convention": ["error", { "rule": "kebab-case" }]
   }
 }
 ```
 
 ## Available rules
-* [casing](./docs/rules/casing.md)
+* [naming convention](./docs/rules/naming-convention.md)
 
 ## LICENSE
 [MIT](./LICENSE)
