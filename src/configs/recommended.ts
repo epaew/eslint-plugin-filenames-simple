@@ -1,7 +1,13 @@
 import { Linter } from 'eslint';
-import { all } from './all';
 
-export const recommended = all;
+export const recommended: Linter.BaseConfig = {
+  plugins: ['filenames-simple'],
+  rules: {
+    'filenames-simple/extname': 'error',
+    'filenames-simple/naming-convention': 'error',
+    'filenames-simple/no-index': 'off',
+  },
+};
 
 export const recommendedReact: Linter.BaseConfig = {
   ...recommended,

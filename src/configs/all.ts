@@ -5,5 +5,6 @@ export const all: Linter.BaseConfig = {
   rules: {
     'filenames-simple/extname': 'error',
     'filenames-simple/naming-convention': 'error',
+    'filenames-simple/no-index': 'error',
   },
 };
