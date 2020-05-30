@@ -13,6 +13,7 @@ jobs:
     name: Jest
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         node:
           - 10.x
