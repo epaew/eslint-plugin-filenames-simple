@@ -1,9 +1,9 @@
 import { RuleTester } from 'eslint';
-import { casing } from '#/rules/casing';
+import { namingConvention } from '#/rules/naming-convention';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('casing', casing, {
+ruleTester.run('naming-convention', namingConvention, {
   valid: [
     { code: '', filename: 'kebab-case.js' },
     { code: '', filename: 'index.js', options: [{ rule: 'PascalCase' }] },
