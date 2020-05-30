@@ -1,9 +1,9 @@
 import { RuleTester } from 'eslint';
-import { extname } from '#/rules/extname';
+import { rules } from '#/rules';
 
 const ruleTester = new RuleTester();
 
-ruleTester.run('extname', extname, {
+ruleTester.run('extname', rules.extname, {
   valid: [
     { code: '', filename: 'index.js' },
     { code: '', filename: 'INDEX.JS', options: ['UPPERCASE'] },
