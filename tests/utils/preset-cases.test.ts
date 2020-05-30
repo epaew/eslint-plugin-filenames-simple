@@ -24,6 +24,10 @@ describe('Preset RegExp of camelCase', () => {
   test('should return false when name is snake_case', () => {
     expect(targetNames.snakeCase.map(subject).some(n => n)).toBeFalsy();
   });
+
+  test('should return false when name is chaos case', () => {
+    expect(targetNames.chaosCase.map(subject).some(n => n)).toBeFalsy();
+  });
 });
 
 describe('Preset RegExp of kebab-case', () => {
@@ -47,6 +51,10 @@ describe('Preset RegExp of kebab-case', () => {
 
   test('should return false when name is snake_case', () => {
     expect(targetNames.snakeCase.map(subject).some(n => n)).toBeFalsy();
+  });
+
+  test('should return false when name is chaos case', () => {
+    expect(targetNames.chaosCase.map(subject).some(n => n)).toBeFalsy();
   });
 });
 
@@ -72,6 +80,10 @@ describe('Preset RegExp of PascalCase', () => {
   test('should return false when name is snake_case', () => {
     expect(targetNames.snakeCase.map(subject).some(n => n)).toBeFalsy();
   });
+
+  test('should return false when name is chaos case', () => {
+    expect(targetNames.chaosCase.map(subject).some(n => n)).toBeFalsy();
+  });
 });
 
 describe('Preset RegExp of snake_case', () => {
@@ -95,5 +107,9 @@ describe('Preset RegExp of snake_case', () => {
 
   test('should return true when name is snake_case', () => {
     expect(targetNames.snakeCase.map(subject).every(n => n)).toBeTruthy();
+  });
+
+  test('should return false when name is chaos case', () => {
+    expect(targetNames.chaosCase.map(subject).some(n => n)).toBeFalsy();
   });
 });

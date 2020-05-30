@@ -28,5 +28,11 @@
     "three_or_more_words_including_snake_case",
     "snake0_case",
     "snake_case0"
+  ],
+  "chaosCase": [
+    "this_Is-A_SampleOfChaos-Case",
+    "ThisIs-1of_the sampleOFChaosCase",
+    "00001",
+    ""
   ]
 }
