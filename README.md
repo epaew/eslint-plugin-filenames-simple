@@ -43,9 +43,17 @@ This plugin is inspired by [eslint-plugin-filenames](https://github.com/selaux/e
     }
     ```
 
+3. Run ESLint and lint your codes.
+    ```sh
+    npm run eslint --ext .js .
+    # or
+    yarn run eslint --ext .js .
+    ```
+
 ## Available rules
 * [extname](./docs/rules/extname.md)
-* [naming convention](./docs/rules/naming-convention.md)
+* [naming-convention](./docs/rules/naming-convention.md)
+* [no-index](./docs/rules/no-index.md)
 
 ## LICENSE
 [MIT](./LICENSE)
