@@ -9,6 +9,7 @@ extends:
   - prettier
   - plugin:prettier/recommended
   - prettier/@typescript-eslint
+  - plugin:filenames-simple/recommended
 parser: '@typescript-eslint/parser'
 parserOptions:
   ecmaVersion: 2019
