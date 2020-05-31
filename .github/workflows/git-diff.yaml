@@ -32,7 +32,7 @@ jobs:
         include:
           - target: CHANGELOG.md
             when: true
-          - target: docs/rules/*
+          - target: docs/rules/.*
             when: ${{ contains(needs.list-diff.outputs.result, 'src/rules') }}
     steps:
       - uses: actions/checkout@v2
