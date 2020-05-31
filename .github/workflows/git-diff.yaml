@@ -8,6 +8,7 @@ on:
 jobs:
   list-diff:
     name: Fetch changed file names
+    if: "!contains(github.event.pull_request.labels.*.name, 'dependencies')"
     runs-on: ubuntu-latest
     outputs:
       result: ${{ steps.changed-files.outputs.diff }}
