@@ -1,6 +1,7 @@
 import path from 'path';
 import { Rule } from 'eslint';
 
+import { fetchOptions } from '../utils/fetch-options';
 import { presetCases } from '../utils/preset-cases';
 import { presetCaseConverters } from '../utils/preset-case-converters';
 
@@ -16,12 +17,10 @@ export const namingConvention: Rule.RuleModule = {
               { enum: ['camelCase', 'kebab-case', 'PascalCase', 'snake_case'] },
               { type: 'string', format: 'regex' },
             ],
-            default: 'kebab-case',
           },
           excepts: {
             type: 'array',
             items: { type: 'string', format: 'regex' },
-            default: ['index'],
           },
         },
         additionalProperties: false,
@@ -30,10 +29,9 @@ export const namingConvention: Rule.RuleModule = {
   },
 
   create: context => {
-    const { rule, excepts }: { rule: string; excepts: string[] } = context.options[0] ?? {
-      rule: 'kebab-case',
-      excepts: ['index'],
-    };
+    const {
+      'naming-convention': [{ rule, excepts }],
+    } = fetchOptions(context, 'naming-convention');
     const ruleRegExp = presetCases[rule] ?? new RegExp(`^${rule}$`);
     const exceptRegExps = excepts.map(e => new RegExp(`^${e}$`));
 

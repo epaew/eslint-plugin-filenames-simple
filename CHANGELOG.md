@@ -1,6 +1,7 @@
 # Unreleased
 ## Features
 * [#9](https://github.com/epaew/eslint-plugin-filenames-simple/pull/9) Add new rule `no-index`
+* [#11](https://github.com/epaew/eslint-plugin-filenames-simple/pull/11) Fetch rule options from shared settings
 
 ## Others
 * [#10](https://github.com/epaew/eslint-plugin-filenames-simple/pull/10) Add CHANGELOG.md
