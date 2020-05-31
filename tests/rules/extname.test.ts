@@ -47,12 +47,3 @@ ruleTester.run('extname', extname, {
     },
   ],
 });
-
-const ruleTesterWithSettings = new RuleTester({
-  settings: { 'filenames-simple': { extname: 'UPPERCASE' } },
-});
-
-ruleTesterWithSettings.run('extname', extname, {
-  valid: [{ code: '', filename: 'INDEX.JS' }],
-  invalid: [{ code: '', filename: 'index.js', errors: ['File extension must be UPPERCASE.'] }],
-});
