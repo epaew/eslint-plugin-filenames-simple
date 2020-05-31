@@ -2,6 +2,7 @@
 This rule enforces file extensions to lowercase/UPPERCASE (and numbers).
 
 ## Configuration example
+### configuration by rule context
 ```json
 {
   "plugins": [
@@ -12,6 +13,23 @@ This rule enforces file extensions to lowercase/UPPERCASE (and numbers).
       "error",
       "lowercase"
     ]
+  }
+}
+```
+
+### configuration by shared settings
+```json
+{
+  "plugins": [
+    "filenames-simple"
+  ],
+  "rules": {
+    "filenames-simple/extname": "error"
+  },
+  "settings": {
+    "filenames-simple": {
+      "extname": "lowercase"
+    }
   }
 }
 ```

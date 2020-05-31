@@ -2,6 +2,7 @@
 This rule make sure the filename follows the naming convention.
 
 ## Configuration example
+### configuration by rule context
 ```json
 {
   "plugins": [
@@ -15,6 +16,26 @@ This rule make sure the filename follows the naming convention.
         "excepts": ["index"]
       }
     ]
+  }
+}
+```
+
+### configuration by shared settings
+```json
+{
+  "plugins": [
+    "filenames-simple"
+  ],
+  "rules": {
+    "filenames-simple/naming-convention": "error"
+  },
+  "settings": {
+    "filenames-simple": {
+      "naming-convention": {
+        "rule": "CamelCase",
+        "excepts": ["index"]
+      }
+    }
   }
 }
 ```
