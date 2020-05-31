@@ -19,8 +19,8 @@
     "build": "tsc",
     "clean": "rimraf dist/*",
     "console": "ts-node",
-    "eslint": "eslint --ext .js,.ts jest.config.js src/ tests/",
-    "eslint:fix": "eslint --fix --ext .js,.ts jest.config.js src/ tests/",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint --fix .",
     "prepack": "npm-run-all eslint test clean build",
     "test": "jest",
     "test:coverage": "jest --coverage"
