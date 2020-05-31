@@ -34,23 +34,8 @@ const mergeOptions = (base: Options, ...overrides: Partial<Options>[]): Options 
   }, base);
 };
 
-const fetchSharedOptions = (context: Rule.RuleContext): Partial<Options> => {
-  const {
-    extname,
-    'naming-convention': namingConvention,
-  }: Partial<{
-    extname: ExtnameOptions[0];
-    'naming-convention': NamingConventionOptions[0];
-  }> = context.settings['filenames-simple'] ?? {};
-
-  return {
-    extname: extname && [extname],
-    'naming-convention': namingConvention && [namingConvention],
-  };
-};
-
 export const fetchOptions = (context: Rule.RuleContext, key: keyof Options): Options => {
-  const sharedOptions = fetchSharedOptions(context);
+  const sharedOptions: Partial<Options> = context.settings['filenames-simple'] ?? {};
   const contextOptions: Partial<Options> = { [key]: [...context.options] };
 
   return mergeOptions(defaultOptions, sharedOptions, contextOptions);

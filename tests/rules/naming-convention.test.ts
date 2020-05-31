@@ -28,18 +28,3 @@ ruleTester.run('naming-convention', namingConvention, {
     },
   ],
 });
-
-const ruleTesterWithSettings = new RuleTester({
-  settings: { 'filenames-simple': { 'naming-convention': { rule: 'camelCase' } } },
-});
-
-ruleTesterWithSettings.run('naming-convention', namingConvention, {
-  valid: [{ code: '', filename: 'camelCase.js' }],
-  invalid: [
-    {
-      code: '',
-      filename: 'kebab-case.js',
-      errors: ["The filename must follow the rule: 'camelCase'. Should rename to kebabCase.js."],
-    },
-  ],
-});
