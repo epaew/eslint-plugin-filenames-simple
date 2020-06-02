@@ -5,7 +5,9 @@
   "keywords": [
     "eslint",
     "eslint-plugin",
-    "filenames"
+    "file",
+    "filename",
+    "simple"
   ],
   "homepage": "https://github.com/epaew/eslint-plugin-filenames-simple",
   "repository": "git@github.com:epaew/eslint-plugin-filenames-simple",
