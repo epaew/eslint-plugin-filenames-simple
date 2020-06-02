@@ -4,6 +4,7 @@
 
 ## Others
 * [#10](https://github.com/epaew/eslint-plugin-filenames-simple/pull/10) Add CHANGELOG.md
+* [#17](https://github.com/epaew/eslint-plugin-filenames-simple/pull/17) Update package keywords
 
 # 0.2.0
 ## Features
