@@ -1,6 +1,7 @@
 # Unreleased
 ## Features
 * [#9](https://github.com/epaew/eslint-plugin-filenames-simple/pull/9) Add new rule `no-index`
+* [#21](https://github.com/epaew/eslint-plugin-filenames-simple/pull/21) Add new rule `named-export`
 
 ## Others
 * [#10](https://github.com/epaew/eslint-plugin-filenames-simple/pull/10) Add CHANGELOG.md
