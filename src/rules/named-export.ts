@@ -36,7 +36,11 @@ export const namedExport: Rule.RuleModule = {
   create: context => {
     return {
       Program: node => {
-        const [filename] = path.basename(context.getFilename()).split('.');
+        const [dirname, basename] = path.resolve(context.getFilename()).split(path.sep).slice(-2);
+        let [filename] = basename.split('.');
+        if (filename === 'index' && dirname !== '') {
+          filename = dirname;
+        }
 
         const [target, ...rest] = fetchTargets(node as Program);
         if (!target || rest.length !== 0) return;

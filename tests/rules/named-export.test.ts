@@ -48,6 +48,10 @@ ruleTesterES2015.run('named-export: single named export', namedExport, {
       filename: 'module.js',
     },
     {
+      code: 'export const rules = {}',
+      filename: 'src/rules/index.js',
+    },
+    {
       code: 'export function myFunction() { return 1; }',
       filename: 'MyFunction.js',
     },
@@ -68,6 +72,11 @@ ruleTesterES2015.run('named-export: single named export', namedExport, {
       errors: [
         'The export name must match the filename. You need to rename to MyModule or myModule.',
       ],
+    },
+    {
+      code: 'export const rule = {}',
+      filename: 'src/rules/index.js',
+      errors: ['The export name must match the filename. You need to rename to Rules or rules.'],
     },
   ],
 });
