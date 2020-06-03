@@ -2,6 +2,8 @@ import path from 'path';
 import { ExportNamedDeclaration, Identifier, Program, VariableDeclaration } from 'estree';
 import { Rule } from 'eslint';
 
+import '../utils/polyfill.node10';
+
 const declarationParser = (node: ExportNamedDeclaration) => {
   if (!node.declaration) return [];
 
@@ -13,12 +15,10 @@ const specifiersParser = (node: ExportNamedDeclaration) => node.specifiers.map(n
 const fetchTargets = (node: Program) =>
   node.body
     .filter(n => n.type === 'ExportNamedDeclaration')
-    .map(n => [
+    .flatMap(n => [
       ...declarationParser(n as ExportNamedDeclaration),
       ...specifiersParser(n as ExportNamedDeclaration),
-    ])
-    .flat()
-    .map(n => (n as Identifier).name);
+    ]);
 
 export const namedExport: Rule.RuleModule = {
   meta: {
