@@ -18,7 +18,7 @@ This rule checks the export name is same as filename.
     ```js
     // default export is ignored
     const module = 1;
-    export default const;
+    export default module;
     ```
 * modules.js
     ```js
@@ -32,14 +32,14 @@ This rule checks the export name is same as filename.
 * my-class.js
     ```js
     /*
-     * When filename is written in kebab-case, camelCase or PascalCase,
+     * When the filename is written in kebab-case, camelCase or PascalCase,
      * the export name can be written in `camelCase` or `PascalCase`
      */
     export class MyClass {}
     ```
 * myFunction.js
     ```js
-    export function myFunction() {}
+    export function myFunction() {} // `MyFunction()` is also OK.
     ```
 
 ### When the filename is `index.js` (`index.ts`)
