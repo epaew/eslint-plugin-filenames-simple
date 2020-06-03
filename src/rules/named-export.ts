@@ -6,6 +6,13 @@ import '../utils/polyfill.node10';
 import { isSameName } from '../utils/is-same-name';
 import { presetCaseConverters } from '../utils/preset-case-converters';
 
+const fetchFilename = (context: Rule.RuleContext) => {
+  const absolutePath = path.resolve(context.getFilename());
+  const [dirname, basename] = absolutePath.split(path.sep).slice(-2);
+  const [filename] = basename.split('.');
+  return filename === 'index' && dirname !== '' ? dirname : filename;
+};
+
 const declarationParser = (node: ExportNamedDeclaration) => {
   if (!node.declaration) return [];
 
@@ -36,11 +43,7 @@ export const namedExport: Rule.RuleModule = {
   create: context => {
     return {
       Program: node => {
-        const [dirname, basename] = path.resolve(context.getFilename()).split(path.sep).slice(-2);
-        let [filename] = basename.split('.');
-        if (filename === 'index' && dirname !== '') {
-          filename = dirname;
-        }
+        const filename = fetchFilename(context);
 
         const [target, ...rest] = fetchTargets(node as Program);
         if (!target || rest.length !== 0) return;
