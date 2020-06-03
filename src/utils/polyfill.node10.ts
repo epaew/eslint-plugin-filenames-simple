@@ -1,20 +1,16 @@
 // Array.prototype.flat
 if (!Array.prototype.flat) {
   Array.prototype.flat = function (depth) {
-    const flattened: any[] = [];
-    const flat = (array: any[], depth: number) => {
-      for (const el of array) {
-        if (Array.isArray(el) && depth > 0) {
-          flat(el, depth - 1);
-        } else {
-          flattened.push(el);
-        }
-      }
+    const flatten = (array: any[], depth: number): any[] => {
+      return array.reduce((result, element) => {
+        return result.concat(
+          Array.isArray(element) && depth > 0 ? flatten(element, depth - 1) : [element],
+        );
+      }, []);
     };
 
     // @ts-ignore
-    flat(this, Math.floor(depth) || 1);
-    return flattened;
+    return flatten(this, Math.floor(depth) || 1);
   };
 }
 
