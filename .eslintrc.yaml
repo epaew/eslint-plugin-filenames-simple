@@ -18,3 +18,12 @@ plugins:
   - '@typescript-eslint'
 rules:
   '@typescript-eslint/explicit-module-boundary-types': off
+overrides:
+  - files:
+      - src/utils/polyfill.node10.ts
+    plugins:
+      - filenames-simple
+    rules:
+      '@typescript-eslint/ban-ts-comment': off
+      '@typescript-eslint/no-explicit-any': off
+      filenames-simple/extname: off

@@ -4,6 +4,7 @@ export const recommended: Linter.BaseConfig = {
   plugins: ['filenames-simple'],
   rules: {
     'filenames-simple/extname': 'error',
+    'filenames-simple/named-export': 'warn',
     'filenames-simple/naming-convention': 'error',
     'filenames-simple/no-index': 'off',
   },
