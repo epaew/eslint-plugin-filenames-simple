@@ -1,8 +1,8 @@
 import path from 'path';
-import { ExportNamedDeclaration, Identifier, Program } from 'estree';
 import { Rule } from 'eslint';
 
 import '../utils/polyfill.node10';
+import { Identifier, Program, ESTreeParser } from '../utils/estree-parser';
 import { isSameName } from '../utils/is-same-name';
 import { presetCaseConverters } from '../utils/preset-case-converters';
 
@@ -13,27 +13,10 @@ const fetchFilename = (context: Rule.RuleContext) => {
   return filename === 'index' && dirname !== '' ? dirname : filename;
 };
 
-const declarationParser = (node: ExportNamedDeclaration) => {
-  if (!node.declaration) return [];
-
-  switch (node.declaration.type) {
-    case 'ClassDeclaration':
-    case 'FunctionDeclaration':
-      return [node.declaration.id];
-    case 'VariableDeclaration':
-      return node.declaration.declarations.map(n => n.id);
-  }
-};
-
-const specifiersParser = (node: ExportNamedDeclaration) => node.specifiers.map(n => n.exported);
-
-const fetchTargets = (node: Program) =>
-  node.body
-    .filter(n => n.type === 'ExportNamedDeclaration')
-    .flatMap(n => [
-      ...declarationParser(n as ExportNamedDeclaration),
-      ...specifiersParser(n as ExportNamedDeclaration),
-    ]) as Identifier[];
+const fetchTargets = (node: Program): Identifier[] =>
+  new ESTreeParser(node)
+    .getExportNamedDeclarationfromProgram()
+    .getIdentifiersFromExportNamedDeclaration().results as Identifier[];
 
 export const namedExport: Rule.RuleModule = {
   meta: {
@@ -52,9 +35,11 @@ export const namedExport: Rule.RuleModule = {
         context.report({
           node: target,
           message:
-            'The export name must match the filename.' +
-            ` You need to rename to ${presetCaseConverters.PascalCase(filename)}` +
-            ` or ${presetCaseConverters.camelCase(filename)}.`,
+            'The export name must match the filename. You need to rename to {{ pascalCase }} or {{ camelCase }}.',
+          data: {
+            pascalCase: presetCaseConverters.PascalCase(filename),
+            camelCase: presetCaseConverters.camelCase(filename),
+          },
         });
       },
     };
