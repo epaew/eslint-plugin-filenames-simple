@@ -6,22 +6,22 @@ This rule checks the export name is same as filename.
 ## Examples
 ### Basic
 * module.js
-    ```js
+    ```javascript
     export const module = 1; // OK
     ```
 * module.js
-    ```js
+    ```javascript
     export const mod = 1; // NG: You can use `module` or `Module` as export name.
     ```
 
 * module.js
-    ```js
+    ```javascript
     // default export is ignored
     const module = 1;
     export default module;
     ```
 * modules.js
-    ```js
+    ```javascript
     // Multiple named exports are ignored too.
     const module1 = 1;
     const module2 = 2;
@@ -30,7 +30,7 @@ This rule checks the export name is same as filename.
 
 ### When the filename contains two or more words
 * my-class.js
-    ```js
+    ```javascript
     /*
      * When the filename is written in kebab-case, camelCase or PascalCase,
      * the export name can be written in `camelCase` or `PascalCase`
@@ -38,21 +38,41 @@ This rule checks the export name is same as filename.
     export class MyClass {}
     ```
 * myFunction.js
-    ```js
+    ```javascript
     export function myFunction() {} // `MyFunction()` is also OK.
     ```
 
 ### When the filename is `index.js` (`index.ts`)
 * src/rules/index.js
-    ```js
+    ```javascript
     // You can use parent directory name as export name.
     export const rules = {};
     ```
 * src/config/index.js
-    ```js
+    ```javascript
     // Multiple named export are ignored.
     export * from './all';
     export * from './recommended';
+    ```
+
+### You can also lint TypeScript notations
+* fruits.ts
+    ```typescript
+    export enum fruits {
+      orange = 'orange',
+      apple = 'apple',
+      banana = 'banana',
+    }
+    ```
+* identifier.ts
+    ```typescript
+    export interface Identifier {
+      name: string;
+    }
+    ```
+* class-expression.d.ts
+    ```typescript
+    export type ClassExpression = { id: Identifier }
     ```
 
 
