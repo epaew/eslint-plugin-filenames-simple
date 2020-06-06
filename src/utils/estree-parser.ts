@@ -1,5 +1,5 @@
 import * as ESTree from 'estree';
-import { TSESTree as TSTree } from '@typescript-eslint/typescript-estree';
+import { AST_NODE_TYPES, TSESTree as TSTree } from '@typescript-eslint/typescript-estree';
 
 import '../utils/polyfill.node10';
 
@@ -8,11 +8,9 @@ type Maybe<T> = T | undefined;
 
 export type DestructuringPattern = ESTree.Pattern | TSTree.DestructuringPattern;
 export type ExportDeclaration = ESTree.Declaration | TSTree.ExportDeclaration | null;
-export type ExportAllDeclaration = ESTree.ExportAllDeclaration | TSTree.ExportAllDeclaration;
-export type ExportDefaultDeclaration =
-  | ESTree.ExportDefaultDeclaration
-  | TSTree.ExportDefaultDeclaration;
-export type ExportNamedDeclaration = ESTree.ExportNamedDeclaration | TSTree.ExportNamedDeclaration;
+export type ExportAllDeclaration = TSTree.ExportAllDeclaration;
+export type ExportDefaultDeclaration = TSTree.ExportDefaultDeclaration;
+export type ExportNamedDeclaration = TSTree.ExportNamedDeclaration;
 export type ExportSpecifier = ESTree.ExportSpecifier | TSTree.ExportSpecifier;
 export type Identifier = ESTree.Identifier | TSTree.Identifier;
 export type Node = ESTree.Node | TSTree.Node;
@@ -26,20 +24,8 @@ export type VariableDeclaration = ESTree.VariableDeclaration | TSTree.VariableDe
 export type VariableDeclarator = ESTree.VariableDeclarator | TSTree.VariableDeclarator;
 
 // functions
-const getExportAllDeclarationsFromProgram = (node: Program): ExportAllDeclaration[] =>
-  (node.body as Statement[]).filter(
-    n => n.type === 'ExportAllDeclaration',
-  ) as ExportAllDeclaration[];
-
-const getExportDefaultDeclarationsFromProgram = (node: Program): ExportDefaultDeclaration[] =>
-  (node.body as Statement[]).filter(
-    n => n.type === 'ExportDefaultDeclaration',
-  ) as ExportDefaultDeclaration[];
-
-const getExportNamedDeclarationsFromProgram = (node: Program): ExportNamedDeclaration[] =>
-  (node.body as Statement[]).filter(
-    n => n.type === 'ExportNamedDeclaration',
-  ) as ExportNamedDeclaration[];
+const getStatementsFromProgram = <T extends Statement>(node: Program, statementType: T['type']) =>
+  (node.body as Statement[]).filter((n): n is T => n.type === statementType);
 
 const getIdentifiersFromDeclarationOfExportNamedDeclaration = (
   node: Maybe<ExportDeclaration>,
@@ -151,7 +137,9 @@ export class ESTreeParser {
   getExportAllDeclarationsFromProgram(): ESTreeParser {
     const results = this.results
       .filter((result): result is Program => result.type === 'Program')
-      .flatMap(result => getExportAllDeclarationsFromProgram(result));
+      .flatMap(result =>
+        getStatementsFromProgram<ExportAllDeclaration>(result, AST_NODE_TYPES.ExportAllDeclaration),
+      );
 
     return new ESTreeParser(results);
   }
@@ -159,7 +147,12 @@ export class ESTreeParser {
   getExportDefaultDeclarationsFromProgram(): ESTreeParser {
     const results = this.results
       .filter((result): result is Program => result.type === 'Program')
-      .flatMap(result => getExportDefaultDeclarationsFromProgram(result));
+      .flatMap(result =>
+        getStatementsFromProgram<ExportDefaultDeclaration>(
+          result,
+          AST_NODE_TYPES.ExportDefaultDeclaration,
+        ),
+      );
 
     return new ESTreeParser(results);
   }
@@ -167,7 +160,12 @@ export class ESTreeParser {
   getExportNamedDeclarationsFromProgram(): ESTreeParser {
     const results = this.results
       .filter((result): result is Program => result.type === 'Program')
-      .flatMap(result => getExportNamedDeclarationsFromProgram(result));
+      .flatMap(result =>
+        getStatementsFromProgram<TSTree.ExportNamedDeclaration>(
+          result,
+          AST_NODE_TYPES.ExportNamedDeclaration,
+        ),
+      );
 
     return new ESTreeParser(results);
   }
