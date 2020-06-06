@@ -8,6 +8,10 @@ type Maybe<T> = T | undefined;
 
 export type DestructuringPattern = ESTree.Pattern | TSTree.DestructuringPattern;
 export type ExportDeclaration = ESTree.Declaration | TSTree.ExportDeclaration | null;
+export type ExportAllDeclaration = ESTree.ExportAllDeclaration | TSTree.ExportAllDeclaration;
+export type ExportDefaultDeclaration =
+  | ESTree.ExportDefaultDeclaration
+  | TSTree.ExportDefaultDeclaration;
 export type ExportNamedDeclaration = ESTree.ExportNamedDeclaration | TSTree.ExportNamedDeclaration;
 export type ExportSpecifier = ESTree.ExportSpecifier | TSTree.ExportSpecifier;
 export type Identifier = ESTree.Identifier | TSTree.Identifier;
@@ -22,7 +26,17 @@ export type VariableDeclaration = ESTree.VariableDeclaration | TSTree.VariableDe
 export type VariableDeclarator = ESTree.VariableDeclarator | TSTree.VariableDeclarator;
 
 // functions
-const getExportNamedDeclarationfromProgram = (node: Program): ExportNamedDeclaration[] =>
+const getExportAllDeclarationsFromProgram = (node: Program): ExportAllDeclaration[] =>
+  (node.body as Statement[]).filter(
+    n => n.type === 'ExportAllDeclaration',
+  ) as ExportAllDeclaration[];
+
+const getExportDefaultDeclarationsFromProgram = (node: Program): ExportDefaultDeclaration[] =>
+  (node.body as Statement[]).filter(
+    n => n.type === 'ExportDefaultDeclaration',
+  ) as ExportDefaultDeclaration[];
+
+const getExportNamedDeclarationsFromProgram = (node: Program): ExportNamedDeclaration[] =>
   (node.body as Statement[]).filter(
     n => n.type === 'ExportNamedDeclaration',
   ) as ExportNamedDeclaration[];
@@ -124,31 +138,47 @@ const getIdentifiersFromVariableDeclaration = (node: VariableDeclaration): Ident
 
 // class
 export class ESTreeParser {
-  private _results: Node[];
+  private readonly results: Node[];
 
-  constructor(node: Node) {
-    this._results = [node];
+  constructor(nodes: Node | Node[]) {
+    this.results = Array.isArray(nodes) ? nodes : [nodes];
   }
 
-  get results(): Node[] {
-    return this._results;
+  unwrap(): Node[] {
+    return this.results;
   }
 
-  getExportNamedDeclarationfromProgram(): ESTreeParser {
-    this._results = this._results
+  getExportAllDeclarationsFromProgram(): ESTreeParser {
+    const results = this.results
       .filter((result): result is Program => result.type === 'Program')
-      .flatMap(result => getExportNamedDeclarationfromProgram(result));
+      .flatMap(result => getExportAllDeclarationsFromProgram(result));
 
-    return this;
+    return new ESTreeParser(results);
+  }
+
+  getExportDefaultDeclarationsFromProgram(): ESTreeParser {
+    const results = this.results
+      .filter((result): result is Program => result.type === 'Program')
+      .flatMap(result => getExportDefaultDeclarationsFromProgram(result));
+
+    return new ESTreeParser(results);
+  }
+
+  getExportNamedDeclarationsFromProgram(): ESTreeParser {
+    const results = this.results
+      .filter((result): result is Program => result.type === 'Program')
+      .flatMap(result => getExportNamedDeclarationsFromProgram(result));
+
+    return new ESTreeParser(results);
   }
 
   getIdentifiersFromExportNamedDeclaration(): ESTreeParser {
-    this._results = this._results
+    const results = this.results
       .filter(
         (result): result is ExportNamedDeclaration => result.type === 'ExportNamedDeclaration',
       )
       .flatMap(result => getIdentifiersFromExportNamedDeclaration(result));
 
-    return this;
+    return new ESTreeParser(results);
   }
 }
