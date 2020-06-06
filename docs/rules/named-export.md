@@ -27,6 +27,13 @@ This rule checks the export name is same as filename.
     const module2 = 2;
     export { module1, module2 };
     ```
+* module.js
+    ```javascript
+    // It is ignored when the file includes both default export and named export.
+    const module = 1;
+    export default module;
+    export const extraModule = { key: 'value' };
+    ```
 
 ### When the filename contains two or more words
 * my-class.js

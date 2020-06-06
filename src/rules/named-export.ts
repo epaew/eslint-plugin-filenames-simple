@@ -13,10 +13,20 @@ const fetchFilename = (context: Rule.RuleContext) => {
   return filename === 'index' && dirname !== '' ? dirname : filename;
 };
 
-const fetchTargets = (node: Program): Identifier[] =>
-  new ESTreeParser(node)
-    .getExportNamedDeclarationfromProgram()
-    .getIdentifiersFromExportNamedDeclaration().results as Identifier[];
+const fetchTargets = (node: Program): Identifier[] => {
+  const programParser = new ESTreeParser(node);
+
+  const exportAllDeclarations = programParser.getExportAllDeclarationsFromProgram().unwrap();
+  const exportDefaultDeclarations = programParser
+    .getExportDefaultDeclarationsFromProgram()
+    .unwrap();
+  if (exportAllDeclarations.length !== 0 || exportDefaultDeclarations.length !== 0) return [];
+
+  return programParser
+    .getExportNamedDeclarationsFromProgram()
+    .getIdentifiersFromExportNamedDeclaration()
+    .unwrap() as Identifier[];
+};
 
 export const namedExport: Rule.RuleModule = {
   meta: {

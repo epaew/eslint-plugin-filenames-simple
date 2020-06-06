@@ -4,11 +4,61 @@ import { Program, ESTreeParser } from '#/utils/estree-parser';
 describe('ESTreeParser', () => {
   const getParser = (node: Program) => new ESTreeParser(node);
 
-  describe('getExportNamedDeclarationfromProgram()', () => {
+  describe('getExportAllDeclarationsFromProgram()', () => {
     const subject = (statements: string) => {
       const program = parse(statements) as Program;
       const parser = getParser(program);
-      return parser.getExportNamedDeclarationfromProgram().results;
+      return parser.getExportAllDeclarationsFromProgram().unwrap();
+    };
+
+    test('With empty statement', () => {
+      const statements = '';
+      expect(subject(statements)).toEqual([]);
+    });
+
+    test('With single const declaration statement', () => {
+      const statements = 'const num = 1';
+      expect(subject(statements)).toEqual([]);
+    });
+
+    test('With single export statement', () => {
+      const statements = "export * from '.'";
+      expect(subject(statements)).toEqual(
+        expect.arrayContaining([expect.objectContaining({ type: 'ExportAllDeclaration' })]),
+      );
+    });
+  });
+
+  describe('getExportDefaultDeclarationsFromProgram()', () => {
+    const subject = (statements: string) => {
+      const program = parse(statements) as Program;
+      const parser = getParser(program);
+      return parser.getExportDefaultDeclarationsFromProgram().unwrap();
+    };
+
+    test('With empty statement', () => {
+      const statements = '';
+      expect(subject(statements)).toEqual([]);
+    });
+
+    test('With single const declaration statement', () => {
+      const statements = 'const num = 1';
+      expect(subject(statements)).toEqual([]);
+    });
+
+    test('With single export statement', () => {
+      const statements = "export default { key: 'value' }";
+      expect(subject(statements)).toEqual(
+        expect.arrayContaining([expect.objectContaining({ type: 'ExportDefaultDeclaration' })]),
+      );
+    });
+  });
+
+  describe('getExportNamedDeclarationsFromProgram()', () => {
+    const subject = (statements: string) => {
+      const program = parse(statements) as Program;
+      const parser = getParser(program);
+      return parser.getExportNamedDeclarationsFromProgram().unwrap();
     };
 
     test('With empty statement', () => {
@@ -34,8 +84,9 @@ describe('ESTreeParser', () => {
       const program = parse(statements) as Program;
       const parser = getParser(program);
       return parser
-        .getExportNamedDeclarationfromProgram()
-        .getIdentifiersFromExportNamedDeclaration().results;
+        .getExportNamedDeclarationsFromProgram()
+        .getIdentifiersFromExportNamedDeclaration()
+        .unwrap();
     };
 
     test('With empty statement', () => {
@@ -123,11 +174,6 @@ describe('ESTreeParser', () => {
         expect.objectContaining({ type: 'Identifier', name: 'm' }),
         expect.objectContaining({ type: 'Identifier', name: 't' }),
       ]);
-    });
-
-    test('With single export statement: *', () => {
-      const statements = "import path from 'path'; export * from path.resolve('../../src/utils/')";
-      console.log(subject(statements));
     });
   });
 });
