@@ -35,6 +35,20 @@ ruleTesterES2015.run('named-export: multiple named export', namedExport, {
   invalid: [],
 });
 
+ruleTesterES2015.run('named-export: single named export with default/all export', namedExport, {
+  valid: [
+    {
+      code: "export const extraModule = 1; export default { key: 'value' }",
+      filename: 'module.js',
+    },
+    {
+      code: "export const extraModule = 1; export * from '.'",
+      filename: 'module.js',
+    },
+  ],
+  invalid: [],
+});
+
 ruleTesterES2015.run('named-export: single named export', namedExport, {
   valid: [
     {
