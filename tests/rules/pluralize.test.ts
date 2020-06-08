@@ -1,5 +1,6 @@
 import { RuleTester } from 'eslint';
 import { pluralize } from '#/rules/pluralize';
+import { Dictionaries } from '#/utils/pluralize';
 
 const ruleTester = new RuleTester();
 
@@ -39,24 +40,8 @@ ruleTester.run('pluralize', pluralize, {
       filename: 'src/controllers/indices.js',
       options: [{ parentDir: 'plural', file: 'plural' }],
     },
-    {
-      code: '',
-      filename: 'src/lib/index.js',
-      options: [
-        { parentDir: 'plural', file: 'singular' },
-        { irregular: [['person', 'people']], uncountable: ['lib'] },
-      ],
-    },
   ],
   invalid: [
-    {
-      code: '',
-      filename: 'src/controller/index.js',
-      options: [{ parentDir: 'plural', file: 'singular' }],
-      errors: [
-        'The filename must follow the pluralize rule. Should rename to controllers/index.js',
-      ],
-    },
     {
       code: '',
       filename: 'src/controller/index.js',
@@ -74,4 +59,20 @@ ruleTester.run('pluralize', pluralize, {
       ],
     },
   ],
+});
+
+const dictonaries: Dictionaries = { irregular: [['person', 'people']], uncountable: ['lib'] };
+const ruleTesterWithDictonaries = new RuleTester({
+  settings: { 'filenames-simple': { pluralize: dictonaries } },
+});
+
+ruleTesterWithDictonaries.run('pluralize', pluralize, {
+  valid: [
+    {
+      code: '',
+      filename: 'src/lib/index.js',
+      options: [{ parentDir: 'plural', file: 'singular' }],
+    },
+  ],
+  invalid: [],
 });
