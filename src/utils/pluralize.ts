@@ -1,6 +1,7 @@
+import { Rule } from 'eslint';
 import pluralize from 'pluralize';
 
-type Rule = 'singular' | 'plural';
+type PluralizeRule = 'singular' | 'plural';
 export type Dictionaries = {
   irregular?: [string, string][];
   plural?: [string, string][];
@@ -8,23 +9,10 @@ export type Dictionaries = {
   uncountable?: string[];
 };
 
-export const correct = (name: string, rule?: Rule) => {
-  const corrector = {
-    singular: pluralize.singular,
-    plural: pluralize.plural,
-  };
-  return rule ? corrector[rule](name) : name;
-};
+export const initPluralize = (context: Pick<Rule.RuleContext, 'settings'>) => {
+  const dictionaries: Dictionaries | undefined = context.settings?.['filenames-simple']?.pluralize;
+  if (!dictionaries) return;
 
-export const isValidName = (name: string, rule?: Rule) => {
-  const validator = {
-    singular: pluralize.isSingular,
-    plural: pluralize.isPlural,
-  };
-  return rule ? validator[rule](name) : true;
-};
-
-export const setDictionaries = (dictionaries: Dictionaries) => {
   const keys: Array<keyof Dictionaries> = ['irregular', 'plural', 'singular', 'uncountable'];
   const dictionarySetter = {
     irregular: ([singular, plural]: [string, string]) =>
@@ -41,4 +29,20 @@ export const setDictionaries = (dictionaries: Dictionaries) => {
     // @ts-ignore
     dictionaries[key] && dictionaries[key].forEach(dictionarySetter[key]);
   });
+};
+
+export const correct = (name: string, rule?: PluralizeRule) => {
+  const corrector = {
+    singular: pluralize.singular,
+    plural: pluralize.plural,
+  };
+  return rule ? corrector[rule](name) : name;
+};
+
+export const isValidName = (name: string, rule?: PluralizeRule) => {
+  const validator = {
+    singular: pluralize.isSingular,
+    plural: pluralize.isPlural,
+  };
+  return rule ? validator[rule](name) : true;
 };

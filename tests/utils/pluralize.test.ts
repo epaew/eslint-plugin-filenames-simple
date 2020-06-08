@@ -1,3 +1,4 @@
+import { Rule } from 'eslint';
 import * as pluralize from '#/utils/pluralize';
 
 describe('pluralize.correct', () => {
@@ -62,28 +63,41 @@ describe('pluralize.isValidName', () => {
   });
 });
 
-describe('pluralize.setDictionaries', () => {
-  const dictionaries = {
-    irregular: [['regular', 'irregular']] as [string, string][],
-    plural: [['index', 'indexes']] as [string, string][],
-    singular: [['shoes', 'shoes']] as [string, string][],
-    uncountable: ['test'],
-  };
-  const subject = () => pluralize.setDictionaries(dictionaries);
+// NOTE: This test affects other tests because the instance of `pluralize` is a singleton.
+describe('pluralize.initPluralize', () => {
+  const subject = (context: Pick<Rule.RuleContext, 'settings'>) => pluralize.initPluralize(context);
 
-  it('returns true when the name is plural', () => {
-    // before setDictionaries()
-    expect(pluralize.correct('regular', 'plural')).toBe('regulars');
-    expect(pluralize.correct('index', 'plural')).toBe('indices');
-    expect(pluralize.correct('shoes', 'singular')).toBe('shoe');
-    expect(pluralize.correct('test', 'plural')).toBe('tests');
+  describe('when dictionaries are empty', () => {
+    const context = { settings: {} };
 
-    subject();
+    it('does not throw error', () => {
+      subject(context);
+    });
+  });
 
-    // after setDictionaries()
-    expect(pluralize.correct('regular', 'plural')).toBe('irregular');
-    expect(pluralize.correct('index', 'plural')).toBe('indexes');
-    expect(pluralize.correct('shoes', 'singular')).toBe('shoes');
-    expect(pluralize.correct('test', 'plural')).toBe('test');
+  describe('when dictionaries are present', () => {
+    const dictionaries = {
+      irregular: [['regular', 'irregular']] as [string, string][],
+      plural: [['index', 'indexes']] as [string, string][],
+      singular: [['shoes', 'shoes']] as [string, string][],
+      uncountable: ['test'],
+    };
+    const context = { settings: { 'filenames-simple': { pluralize: dictionaries } } };
+
+    it('set the dictionaries of pluralize', () => {
+      // before setDictionaries()
+      expect(pluralize.correct('regular', 'plural')).toBe('regulars');
+      expect(pluralize.correct('index', 'plural')).toBe('indices');
+      expect(pluralize.correct('shoes', 'singular')).toBe('shoe');
+      expect(pluralize.correct('test', 'plural')).toBe('tests');
+
+      subject(context);
+
+      // after setDictionaries()
+      expect(pluralize.correct('regular', 'plural')).toBe('irregular');
+      expect(pluralize.correct('index', 'plural')).toBe('indexes');
+      expect(pluralize.correct('shoes', 'singular')).toBe('shoes');
+      expect(pluralize.correct('test', 'plural')).toBe('test');
+    });
   });
 });
