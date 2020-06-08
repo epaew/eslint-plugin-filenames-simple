@@ -3,7 +3,30 @@ This rule checks the export name is same as filename.
 
 **NOTE:** this rule is only enabled when `parserOptions.ecmaVersion` in `.eslintrc` is set to `6` (`2015`) or later.
 
-## Examples
+## Configuration example
+```json
+{
+  "plugins": [
+    "filenames-simple"
+  ],
+  "rules": {
+    "filenames-simple/named-export": ["error", "singular"]
+  }
+}
+```
+
+
+## Available options
+### rule: (the first option)
+Specify one of the following as the file naming convention to which this rule applies.
+
+#### Naming convention presets
+* always (default): Always check the export name.
+* singular: Check the export name only if filename is singular.
+* plural: Check the export name only if filename is plural.
+
+
+## Rule details
 ### Basic
 * module.js
     ```javascript
@@ -81,19 +104,3 @@ This rule checks the export name is same as filename.
     ```typescript
     export type ClassExpression = { id: Identifier }
     ```
-
-
-## Configuration example
-```json
-{
-  "plugins": [
-    "filenames-simple"
-  ],
-  "rules": {
-    "filenames-simple/named-export": "error"
-  }
-}
-```
-
-## Available options
-No options are provided.

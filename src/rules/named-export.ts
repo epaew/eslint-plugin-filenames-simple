@@ -5,6 +5,9 @@ import '../utils/polyfill.node10';
 import { Identifier, Program, ESTreeParser } from '../utils/estree-parser';
 import { isSameName } from '../utils/is-same-name';
 import { presetCaseConverters } from '../utils/preset-case-converters';
+import { isValidName } from '../utils/pluralize';
+
+type Pluralize = 'always' | 'singular' | 'plural';
 
 const fetchFilename = (context: Rule.RuleContext) => {
   const absolutePath = path.resolve(context.getFilename());
@@ -31,12 +34,15 @@ const fetchTargets = (node: Program): Identifier[] => {
 export const namedExport: Rule.RuleModule = {
   meta: {
     type: 'suggestion',
-    schema: [],
+    schema: [{ enum: ['always', 'singular', 'plural'] }],
   },
   create: context => {
     return {
       Program: node => {
+        const pluralize: Pluralize = context.options[0] ?? 'always';
         const filename = fetchFilename(context);
+
+        if (!(pluralize === 'always' || isValidName(filename, pluralize))) return;
 
         const [target, ...rest] = fetchTargets(node as Program);
         if (!target || rest.length !== 0) return;
