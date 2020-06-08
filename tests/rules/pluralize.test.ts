@@ -42,7 +42,10 @@ ruleTester.run('pluralize', pluralize, {
     {
       code: '',
       filename: 'src/lib/index.js',
-      options: [{ parentDir: 'plural', file: 'singular' }, { uncountable: ['lib'] }],
+      options: [
+        { parentDir: 'plural', file: 'singular' },
+        { irregular: [['person', 'people']], uncountable: ['lib'] },
+      ],
     },
   ],
   invalid: [

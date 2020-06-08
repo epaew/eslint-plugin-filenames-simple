@@ -11,6 +11,20 @@ type Options = {
   rules: Rules;
 };
 
+const irregular = {
+  type: 'array',
+  items: {
+    type: 'array',
+    items: [{ type: 'string' }, { type: 'string' }],
+    maxItems: 2,
+    minItems: 2,
+  },
+  minItems: 1,
+  uniqueItems: true,
+};
+const plural = irregular;
+const singular = irregular;
+
 const fetchFilename = (context: Rule.RuleContext): [string, string[]] => {
   const absolutePath = path.resolve(context.getFilename());
   const [dirname, basename] = absolutePath.split(path.sep).slice(-2);
@@ -39,21 +53,9 @@ export const pluralize: Rule.RuleModule = {
       {
         type: 'object',
         properties: {
-          irregular: {
-            type: 'object',
-            additionalProperties: { type: 'string' },
-            minProperties: 1,
-          },
-          plural: {
-            type: 'object',
-            additionalProperties: { type: 'string' },
-            minProperties: 1,
-          },
-          singular: {
-            type: 'object',
-            additionalProperties: { type: 'string' },
-            minProperties: 1,
-          },
+          irregular,
+          plural,
+          singular,
           uncountable: {
             type: 'array',
             items: { type: 'string' },
