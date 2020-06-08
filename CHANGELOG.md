@@ -1,11 +1,13 @@
 # Unreleased
 ## Features
 * [#12](https://github.com/epaew/eslint-plugin-filenames-simple/pull/12) Add new rule `pluralize`
+* [#37](https://github.com/epaew/eslint-plugin-filenames-simple/pull/37)
+Add options for the rule `named-export` to limit the filenames to which this rule applies.
 
 # 0.3.1
 ## Bugfix
-* [#27](https://github.com/epaew/eslint-plugin-filenames-simple/pull/27) Fixed the behavior that ESLint execution fails
-when the lint target includes TypeScript notation and the rule `named-export` is enabled.
+* [#27](https://github.com/epaew/eslint-plugin-filenames-simple/pull/27)
+Fixed the behavior that ESLint execution fails when the lint target includes TypeScript notation and the rule `named-export` is enabled.
 * [#30](https://github.com/epaew/eslint-plugin-filenames-simple/pull/30)
     * Fixed false positives when statement contains both default export and single named export.
     * Fixed false positives when statement contains both all export (`export *`) and single named export.

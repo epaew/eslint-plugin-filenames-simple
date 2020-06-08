@@ -75,6 +75,16 @@ ruleTesterES2015.run('named-export: single named export', namedExport, {
       code: 'export class MySuperClass {}',
       filename: 'my-super-class.js',
     },
+    {
+      code: 'const module = 1; export { module }',
+      filename: 'module.js',
+      options: ['always'],
+    },
+    {
+      code: 'const module = 1; export { module }',
+      filename: 'modules.js',
+      options: ['singular'],
+    },
   ],
   invalid: [
     {
