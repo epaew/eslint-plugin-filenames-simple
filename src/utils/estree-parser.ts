@@ -134,40 +134,24 @@ export class ESTreeParser {
     return this.results;
   }
 
-  getExportAllDeclarationsFromProgram(): ESTreeParser {
+  private getStatementsFromProgram<T extends Statement>(type: T['type']): ESTreeParser {
     const results = this.results
       .filter((result): result is Program => result.type === 'Program')
-      .flatMap(result =>
-        getStatementsFromProgram<ExportAllDeclaration>(result, AST_NODE_TYPES.ExportAllDeclaration),
-      );
+      .flatMap(result => getStatementsFromProgram<T>(result, type));
 
     return new ESTreeParser(results);
+  }
+
+  getExportAllDeclarationsFromProgram(): ESTreeParser {
+    return this.getStatementsFromProgram(AST_NODE_TYPES.ExportAllDeclaration);
   }
 
   getExportDefaultDeclarationsFromProgram(): ESTreeParser {
-    const results = this.results
-      .filter((result): result is Program => result.type === 'Program')
-      .flatMap(result =>
-        getStatementsFromProgram<ExportDefaultDeclaration>(
-          result,
-          AST_NODE_TYPES.ExportDefaultDeclaration,
-        ),
-      );
-
-    return new ESTreeParser(results);
+    return this.getStatementsFromProgram(AST_NODE_TYPES.ExportDefaultDeclaration);
   }
 
   getExportNamedDeclarationsFromProgram(): ESTreeParser {
-    const results = this.results
-      .filter((result): result is Program => result.type === 'Program')
-      .flatMap(result =>
-        getStatementsFromProgram<TSTree.ExportNamedDeclaration>(
-          result,
-          AST_NODE_TYPES.ExportNamedDeclaration,
-        ),
-      );
-
-    return new ESTreeParser(results);
+    return this.getStatementsFromProgram(AST_NODE_TYPES.ExportNamedDeclaration);
   }
 
   getIdentifiersFromExportNamedDeclaration(): ESTreeParser {
