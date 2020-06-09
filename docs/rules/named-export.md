@@ -104,3 +104,6 @@ Specify one of the following as the file naming convention to which this rule ap
     ```typescript
     export type ClassExpression = { id: Identifier }
     ```
+
+## See also
+* [settings/pluralize](../settings/pluralize.md)
