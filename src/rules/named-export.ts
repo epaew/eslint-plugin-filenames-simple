@@ -5,7 +5,7 @@ import '../utils/polyfill.node10';
 import { Identifier, Program, ESTreeParser } from '../utils/estree-parser';
 import { isSameName } from '../utils/is-same-name';
 import { presetCaseConverters } from '../utils/preset-case-converters';
-import { isValidName } from '../utils/pluralize';
+import { initPluralize, isValidName } from '../utils/pluralize';
 
 type Pluralize = 'always' | 'singular' | 'plural';
 
@@ -37,9 +37,11 @@ export const namedExport: Rule.RuleModule = {
     schema: [{ enum: ['always', 'singular', 'plural'] }],
   },
   create: context => {
+    initPluralize(context);
+    const pluralize: Pluralize = context.options[0] ?? 'always';
+
     return {
       Program: node => {
-        const pluralize: Pluralize = context.options[0] ?? 'always';
         const filename = fetchFilename(context);
 
         if (!(pluralize === 'always' || isValidName(filename, pluralize))) return;

@@ -13,9 +13,6 @@ This rule ensures that filenames are plural (or singular).
       {
         "parentDir": "plural",
         "file": "singular"
-      },
-      {
-        "uncountable": ["water"]
       }
     ]
   }
@@ -30,16 +27,5 @@ Specify one of the following naming conventions for each `parentDir` or `file`.
 * singular
 * plural
 
-### dictionaries: (the second option)
-Specify the dictionary to pass to the `pluralize` library.  
-See also: https://github.com/blakeembrey/pluralize#usage
-
-#### Keys and examples
-* irregular: array of arguments for `pluralize.addIrregularRule()`
-  * e.g. `[["singular", "plural"], ["person", "people"]]`
-* plural: array of arguments for `pluralize.addPluralRule()`
-  * e.g. `[["plural", "singular"]]`
-* singular: array of arguments for `pluralize.addSingularRule()`
-  * e.g. `[["singular", "plural"]]`
-* uncountable: array of arguments for `pluralize.addUncountableRule()`
-  * e.g. `["uncountable", "water"]`
+## See also
+* [settings/pluralize](../settings/pluralize.md)
