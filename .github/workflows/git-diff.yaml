@@ -32,7 +32,7 @@ jobs:
       matrix:
         include:
           - target: CHANGELOG.md
-            when: ${{ contains(needs.list-diff.outputs.result, 'src/rules') }}
+            when: ${{ contains(needs.list-diff.outputs.result, 'src') }}
           - target: docs/rules/.*
             when: ${{ contains(needs.list-diff.outputs.result, 'src/rules') }}
     steps:

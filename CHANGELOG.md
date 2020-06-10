@@ -5,6 +5,8 @@
 Add options for the rule `named-export` to limit the filenames to which this rule applies.
 * [#38](https://github.com/epaew/eslint-plugin-filenames-simple/pull/38)
 Change where to get the dictionaries for the rule `pluralize`.
+* [#47](https://github.com/epaew/eslint-plugin-filenames-simple/pull/47)
+Update option of rule `named-export` in `configs.recommended`
 
 # 0.3.1
 ## Bugfix
