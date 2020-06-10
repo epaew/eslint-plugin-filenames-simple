@@ -1,4 +1,6 @@
 # Unreleased
+
+# 0.4.0
 ## Features
 * [#12](https://github.com/epaew/eslint-plugin-filenames-simple/pull/12) Add new rule `pluralize`
 * [#37](https://github.com/epaew/eslint-plugin-filenames-simple/pull/37)
