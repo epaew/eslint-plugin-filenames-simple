@@ -1,7 +1,6 @@
 import path from 'path';
 import { Rule } from 'eslint';
 
-import '../utils/polyfill.node10';
 import { Identifier, Program, ESTreeParser } from '../utils/estree-parser';
 import { isSameName } from '../utils/is-same-name';
 import { presetCaseConverters } from '../utils/preset-case-converters';

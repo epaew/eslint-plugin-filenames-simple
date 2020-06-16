@@ -1,7 +1,6 @@
+import 'core-js/features/array/flat-map';
 import * as ESTree from 'estree';
 import { AST_NODE_TYPES, TSESTree as TSTree } from '@typescript-eslint/typescript-estree';
-
-import '../utils/polyfill.node10';
 
 // types
 type Maybe<T> = T | undefined;
