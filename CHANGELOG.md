@@ -1,4 +1,9 @@
 # Unreleased
+## Features
+## Bugfixes
+## Others
+* [#51](https://github.com/epaew/eslint-plugin-filenames-simple/pull/51)
+Use `core-js` as replacement of my own polyfill implementation.
 
 # 0.4.0
 ## Features
@@ -11,7 +16,7 @@ Change where to get the dictionaries for the rule `pluralize`.
 Update option of rule `named-export` in `configs.recommended`
 
 # 0.3.1
-## Bugfix
+## Bugfixes
 * [#27](https://github.com/epaew/eslint-plugin-filenames-simple/pull/27)
 Fixed the behavior that ESLint execution fails when the lint target includes TypeScript notation and the rule `named-export` is enabled.
 * [#30](https://github.com/epaew/eslint-plugin-filenames-simple/pull/30)
@@ -34,7 +39,7 @@ Fixed the behavior that ESLint execution fails when the lint target includes Typ
 * [#4](https://github.com/epaew/eslint-plugin-filenames-simple/pull/4) Add rule `extname`
 * [#5](https://github.com/epaew/eslint-plugin-filenames-simple/pull/5) Add rule presets
 
-## Bugfix
+## Bugfixes
 * [#3](https://github.com/epaew/eslint-plugin-filenames-simple/pull/3) Fixup suggested filename in error message
 
 ## Others
