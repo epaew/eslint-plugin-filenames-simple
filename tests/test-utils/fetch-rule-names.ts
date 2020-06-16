@@ -13,8 +13,12 @@ export const fetchAllRuleNames = () =>
 export const fetchAvailableRuleNames = async () => {
   return asyncArrayFilter<string>(fetchAllRuleNames(), async name => {
     const camelizedName = presetCaseConverters['camelCase'](name);
-    const rule = await import(name);
 
-    return !rule[camelizedName].meta.deprecated;
+    try {
+      const rule = await import(name);
+      return !rule[camelizedName].meta.deprecated;
+    } catch {
+      return false;
+    }
   });
 };
