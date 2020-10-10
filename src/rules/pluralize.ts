@@ -1,6 +1,7 @@
 import path from 'path';
 import { Rule } from 'eslint';
-import { correct, initPluralize, isValidName } from '../utils/pluralize';
+
+import { Pluralize, PluralizeRule } from '../utils/pluralize';
 
 type Rules = {
   parentDir?: 'singular' | 'plural';
@@ -30,22 +31,29 @@ export const pluralize: Rule.RuleModule = {
     ],
   },
   create: context => {
-    initPluralize(context);
+    const pluralize = new Pluralize(context.settings?.['filenames-simple']?.pluralize);
     const rules: Rules = context.options[0] ?? {};
+
+    const correctedName = (name: string, rule?: PluralizeRule) =>
+      rule ? pluralize.correct(name, rule) : name;
+    const isValidName = (name: string, rule?: PluralizeRule) =>
+      rule ? pluralize.isValidName(name, rule) : true;
 
     return {
       Program: node => {
         const [dirname, [filename, ...rest]] = fetchFilename(context);
 
-        if (isValidName(dirname, rules.parentDir) && isValidName(filename, rules.file)) return;
+        if (isValidName(dirname, rules.parentDir) && isValidName(filename, rules.file)) {
+          return;
+        }
 
         context.report({
           node: node,
           message:
             'The filename must follow the pluralize rule. Should rename to {{ dirname }}/{{ filename }}.{{ extname }}',
           data: {
-            dirname: correct(dirname, rules.parentDir),
-            filename: correct(filename, rules.file),
+            dirname: correctedName(dirname, rules.parentDir),
+            filename: correctedName(filename, rules.file),
             extname: rest.join('.'),
           },
         });
