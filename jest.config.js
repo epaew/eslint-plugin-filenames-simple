@@ -2,7 +2,7 @@ module.exports = {
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
   globals: {
     'ts-jest': {
-      tsConfig: 'tests/tsconfig.json',
+      tsConfig: '__tests__/tsconfig.json',
     },
   },
   moduleNameMapper: {
@@ -10,5 +10,5 @@ module.exports = {
   },
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testMatch: ['<rootDir>/tests/**/*.test.ts'],
+  testMatch: ['<rootDir>/__tests__/**/*.test.ts'],
 };
