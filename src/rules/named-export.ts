@@ -4,9 +4,9 @@ import { Rule } from 'eslint';
 import { Identifier, Program, ESTreeParser } from '../utils/estree-parser';
 import { isSameName } from '../utils/is-same-name';
 import { presetCaseConverters } from '../utils/preset-case-converters';
-import { initPluralize, isValidName } from '../utils/pluralize';
+import { Pluralize } from '../utils/pluralize';
 
-type Pluralize = 'always' | 'singular' | 'plural';
+type PluralizeRule = 'always' | 'singular' | 'plural';
 
 const fetchFilename = (context: Rule.RuleContext) => {
   const absolutePath = path.resolve(context.getFilename());
@@ -36,14 +36,14 @@ export const namedExport: Rule.RuleModule = {
     schema: [{ enum: ['always', 'singular', 'plural'] }],
   },
   create: context => {
-    initPluralize(context);
-    const pluralize: Pluralize = context.options[0] ?? 'always';
+    const pluralize = new Pluralize(context.settings?.['filenames-simple']?.pluralize);
+    const rule: PluralizeRule = context.options[0] ?? 'always';
 
     return {
       Program: node => {
         const filename = fetchFilename(context);
 
-        if (!(pluralize === 'always' || isValidName(filename, pluralize))) return;
+        if (!(rule === 'always' || pluralize.isValidName(filename, rule))) return;
 
         const [target, ...rest] = fetchTargets(node as Program);
         if (!target || rest.length !== 0) return;

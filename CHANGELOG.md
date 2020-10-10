@@ -4,6 +4,8 @@
 ## Others
 * [#51](https://github.com/epaew/eslint-plugin-filenames-simple/pull/51)
 Use `core-js` as replacement of my own polyfill implementation.
+* [#147](https://github.com/epaew/eslint-plugin-filenames-simple/pull/147)
+Refactor utils/pluralize: Remove dependency on `eslint` package.
 
 # 0.4.0
 ## Features
