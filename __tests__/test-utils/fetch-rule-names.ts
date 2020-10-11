@@ -1,7 +1,7 @@
 import path from 'path';
 import glob from 'glob';
 
-import { presetCaseConverters } from '#/utils/preset-case-converters';
+import { presetRules } from '#/utils/preset-rules';
 import { asyncArrayFilter } from './async-array-filter';
 
 export const fetchAllRuleNames = () =>
@@ -12,7 +12,7 @@ export const fetchAllRuleNames = () =>
 
 export const fetchAvailableRuleNames = async () => {
   return asyncArrayFilter<string>(fetchAllRuleNames(), async name => {
-    const camelizedName = presetCaseConverters['camelCase'](name);
+    const camelizedName = presetRules.camelCase.recommendationBuilder(name);
 
     try {
       const rule = await import(name);

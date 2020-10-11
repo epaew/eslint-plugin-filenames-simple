@@ -3,7 +3,7 @@ import { Rule } from 'eslint';
 
 import { Identifier, Program, ESTreeParser } from '../utils/estree-parser';
 import { isSameName } from '../utils/is-same-name';
-import { presetCaseConverters } from '../utils/preset-case-converters';
+import { presetRules } from '../utils/preset-rules';
 import { Pluralize } from '../utils/pluralize';
 
 type PluralizeRule = 'always' | 'singular' | 'plural';
@@ -54,8 +54,8 @@ export const namedExport: Rule.RuleModule = {
           message:
             'The export name must match the filename. You need to rename to {{ pascalCase }} or {{ camelCase }}.',
           data: {
-            pascalCase: presetCaseConverters.PascalCase(filename),
-            camelCase: presetCaseConverters.camelCase(filename),
+            pascalCase: presetRules.PascalCase.recommendationBuilder(filename),
+            camelCase: presetRules.camelCase.recommendationBuilder(filename),
           },
         });
       },
