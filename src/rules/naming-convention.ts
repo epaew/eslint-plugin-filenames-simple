@@ -1,7 +1,7 @@
 import path from 'path';
 import { Rule } from 'eslint';
 
-import { getRule } from '../utils/preset-rules';
+import { getCaseValidator } from '../utils/case-validator';
 
 export const namingConvention: Rule.RuleModule = {
   meta: {
@@ -33,8 +33,7 @@ export const namingConvention: Rule.RuleModule = {
       rule: 'kebab-case',
       excepts: ['index'],
     };
-    const rule = getRule(ruleName);
-    const exceptRegExps = excepts.map(e => new RegExp(`^${e}$`));
+    const validator = getCaseValidator(ruleName, excepts);
 
     return {
       Program: node => {
@@ -44,21 +43,19 @@ export const namingConvention: Rule.RuleModule = {
           context.report({ node, message: 'The filename is empty' });
         }
 
-        if (exceptRegExps.some(re => re.test(filename))) return;
+        if (validator.validate(filename)) return;
 
-        if (!rule.expression.test(filename)) {
-          const suggest = (() => {
-            if (!rule.recommendationBuilder) return null;
+        const suggestion = (() => {
+          try {
+            const recommendedName = validator.getRecommendedName(filename);
+            return ` Should rename to ${[recommendedName, ...rest].join('.')}.`;
+          } catch {
+            // nothing to do
+          }
+        })();
+        const message = `The filename must follow the rule: '${ruleName}'.${suggestion ?? ''}`;
 
-            const alterName = rule.recommendationBuilder(filename);
-            if (!rule.expression.test(alterName)) return null;
-
-            return ` Should rename to ${[alterName, ...rest].join('.')}.`;
-          })();
-          const message = `The filename must follow the rule: '${ruleName}'.${suggest ?? ''}`;
-
-          context.report({ node, message });
-        }
+        context.report({ node, message });
       },
     };
   },
