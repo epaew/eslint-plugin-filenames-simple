@@ -8,6 +8,8 @@ Use `core-js` as replacement of my own polyfill implementation.
 Refactor utils/pluralize: Remove dependency on `eslint` package.
 * [#149](https://github.com/epaew/eslint-plugin-filenames-simple/pull/149)
 Refactoring: Replace utils/preset-cases with utils/preset-rules.
+* [#148](https://github.com/epaew/eslint-plugin-filenames-simple/pull/148)
+Refactoring: Add utils/case-validator to reduce complexity of rules/naming-convention.
 
 # 0.4.0
 ## Features
