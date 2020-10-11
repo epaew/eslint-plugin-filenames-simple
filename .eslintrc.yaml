@@ -18,3 +18,8 @@ plugins:
   - '@typescript-eslint'
 rules:
   '@typescript-eslint/explicit-module-boundary-types': off
+overrides:
+  - files:
+      - '__tests__/**'
+    rules:
+      filenames-simple/extname: off

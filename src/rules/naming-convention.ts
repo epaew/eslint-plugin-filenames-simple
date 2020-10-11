@@ -1,8 +1,7 @@
 import path from 'path';
 import { Rule } from 'eslint';
 
-import { presetCases } from '../utils/preset-cases';
-import { presetCaseConverters } from '../utils/preset-case-converters';
+import { getRule } from '../utils/preset-rules';
 
 export const namingConvention: Rule.RuleModule = {
   meta: {
@@ -30,11 +29,11 @@ export const namingConvention: Rule.RuleModule = {
   },
 
   create: context => {
-    const { rule, excepts }: { rule: string; excepts: string[] } = context.options[0] ?? {
+    const { rule: ruleName, excepts }: { rule: string; excepts: string[] } = context.options[0] ?? {
       rule: 'kebab-case',
       excepts: ['index'],
     };
-    const ruleRegExp = presetCases[rule] ?? new RegExp(`^${rule}$`);
+    const rule = getRule(ruleName);
     const exceptRegExps = excepts.map(e => new RegExp(`^${e}$`));
 
     return {
@@ -47,16 +46,16 @@ export const namingConvention: Rule.RuleModule = {
 
         if (exceptRegExps.some(re => re.test(filename))) return;
 
-        if (!ruleRegExp.test(filename)) {
+        if (!rule.expression.test(filename)) {
           const suggest = (() => {
-            if (!presetCaseConverters[rule]) return null;
+            if (!rule.recommendationBuilder) return null;
 
-            const alterName = presetCaseConverters[rule](filename) ?? '';
-            if (!ruleRegExp.test(alterName)) return null;
+            const alterName = rule.recommendationBuilder(filename);
+            if (!rule.expression.test(alterName)) return null;
 
             return ` Should rename to ${[alterName, ...rest].join('.')}.`;
           })();
-          const message = `The filename must follow the rule: '${rule}'.${suggest ?? ''}`;
+          const message = `The filename must follow the rule: '${ruleName}'.${suggest ?? ''}`;
 
           context.report({ node, message });
         }
