@@ -15,7 +15,7 @@ type PresetRules = {
 export const presetRules: PresetRules = {
   camelCase: {
     expression: /^[a-z][a-zA-Z0-9]*$/,
-    recommendationBuilder: name => {
+    recommendationBuilder: (name: string): string => {
       return splitName(name)
         .map((word, i) => {
           if (i === 0) return word;
@@ -28,13 +28,13 @@ export const presetRules: PresetRules = {
   },
   'kebab-case': {
     expression: /^[a-z][-a-z0-9]*$/,
-    recommendationBuilder: name => {
+    recommendationBuilder: (name: string): string => {
       return splitName(name).join('-');
     },
   },
   PascalCase: {
     expression: /^[A-Z][a-zA-Z0-9]*$/,
-    recommendationBuilder: name => {
+    recommendationBuilder: (name: string): string => {
       return splitName(name)
         .map(word => {
           const [first, ...rest] = word;
@@ -45,7 +45,7 @@ export const presetRules: PresetRules = {
   },
   snake_case: {
     expression: /^[a-z][_a-z0-9]*$/,
-    recommendationBuilder: name => {
+    recommendationBuilder: (name: string): string => {
       return splitName(name).join('_');
     },
   },
