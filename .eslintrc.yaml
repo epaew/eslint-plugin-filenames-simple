@@ -14,12 +14,12 @@ parser: '@typescript-eslint/parser'
 parserOptions:
   ecmaVersion: 2019
   sourceType: module
-plugins:
-  - '@typescript-eslint'
-rules:
-  '@typescript-eslint/explicit-module-boundary-types': off
 overrides:
   - files:
       - '__tests__/**'
+    plugins:
+      - '@typescript-eslint'
+      - filenames-simple
     rules:
+      '@typescript-eslint/explicit-module-boundary-types': off
       filenames-simple/extname: off
