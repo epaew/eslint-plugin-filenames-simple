@@ -62,7 +62,13 @@ describe('presetRules.PascalCase', () => {
     });
 
     test('should return same strings when name is PascalCase', () => {
-      expect(targetNames.pascalCase.map(subject)).toEqual(targetNames.pascalCase);
+      expect(targetNames.pascalCase.map(subject)).toEqual([
+        'PascalCase',
+        'ThreeOrMoreWordsIncludingPascalCase',
+        'Pascal0Case',
+        'PascalCase0',
+        'EcmaScript', // ECMAScript will fixed to EcmaScript..
+      ]);
     });
 
     test('should return pascalized strings when name is snake_case', () => {

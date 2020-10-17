@@ -57,6 +57,7 @@ describe('presetRules.kebab-case', () => {
         'three-or-more-words-including-pascal-case',
         'pascal0-case',
         'pascal-case0',
+        'ecma-script',
       ]);
     });
 
