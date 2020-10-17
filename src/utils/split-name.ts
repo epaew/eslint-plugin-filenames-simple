@@ -4,7 +4,7 @@
 export const splitName = (name: string): string[] => {
   return name
     .replace(/_/g, '-')
-    .replace(/([a-z0-9])([A-Z])|([A-Z])([A-Z])(?:[a-z])/g, '$1-$2')
+    .replace(/([a-z0-9])([A-Z])|([A-Z])([A-Z])(?=[a-z])/g, '$1$3-$2$4')
     .toLowerCase()
     .split('-');
 };
