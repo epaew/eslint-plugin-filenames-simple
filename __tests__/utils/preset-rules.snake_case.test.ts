@@ -62,6 +62,7 @@ describe('presetRules.snake_case', () => {
         'three_or_more_words_including_pascal_case',
         'pascal0_case',
         'pascal_case0',
+        'ecma_script',
       ]);
     });
 

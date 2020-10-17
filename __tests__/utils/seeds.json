@@ -21,7 +21,8 @@
     "PascalCase",
     "ThreeOrMoreWordsIncludingPascalCase",
     "Pascal0Case",
-    "PascalCase0"
+    "PascalCase0",
+    "ECMAScript"
   ],
   "snakeCase": [
     "snake_case",

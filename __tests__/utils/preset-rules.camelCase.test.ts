@@ -57,6 +57,7 @@ describe('presetRules.camelCase', () => {
         'threeOrMoreWordsIncludingPascalCase',
         'pascal0Case',
         'pascalCase0',
+        'ecmaScript',
       ]);
     });
 
