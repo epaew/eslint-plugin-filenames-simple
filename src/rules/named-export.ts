@@ -2,7 +2,6 @@ import path from 'path';
 import { Rule } from 'eslint';
 
 import { Identifier, Program, ESTreeParser } from '../utils/estree-parser';
-import { isSameName } from '../utils/is-same-name';
 import { presetRules } from '../utils/preset-rules';
 import { Pluralize } from '../utils/pluralize';
 
@@ -30,6 +29,10 @@ const fetchTargets = (node: Program): Identifier[] => {
     .unwrap() as Identifier[];
 };
 
+const getNameToCompare = (name: string) => name.replace(/[-_]/g, '').toLowerCase();
+const isSameName = (name1: string, name2: string): boolean =>
+  getNameToCompare(name1) === getNameToCompare(name2);
+
 export const namedExport: Rule.RuleModule = {
   meta: {
     type: 'suggestion',
@@ -47,7 +50,7 @@ export const namedExport: Rule.RuleModule = {
 
         const [target, ...rest] = fetchTargets(node as Program);
         if (!target || rest.length !== 0) return;
-        if (isSameName(target.name, filename, true)) return;
+        if (isSameName(target.name, filename)) return;
 
         context.report({
           node: target,
