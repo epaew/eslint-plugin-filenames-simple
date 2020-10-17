@@ -75,6 +75,11 @@ ruleTesterES2015.run('named-export: single named export', namedExport, {
       code: 'export class MySuperClass {}',
       filename: 'my-super-class.js',
     },
+    // https://github.com/epaew/eslint-plugin-filenames-simple/issues/156
+    {
+      code: 'export class ESTreeParser {}',
+      filename: 'estree-parser.js',
+    },
     {
       code: 'const module = 1; export { module }',
       filename: 'module.js',
