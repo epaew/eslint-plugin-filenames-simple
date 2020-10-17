@@ -1,7 +1,8 @@
 import path from 'path';
 import { Rule } from 'eslint';
 
-import { Identifier, Program, ESTreeParser } from '../utils/estree-parser';
+import { ESTreeParser } from '../utils/estree-parser';
+import { Identifier, Program } from '../utils/estree-parser/types';
 import { presetRules } from '../utils/preset-rules';
 import { Pluralize } from '../utils/pluralize';
 

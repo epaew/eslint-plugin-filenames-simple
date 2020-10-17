@@ -1,6 +1,7 @@
 import { parse as esParse } from 'espree';
 import { parse as tsParse } from '@typescript-eslint/typescript-estree';
-import { Program, ESTreeParser } from '#/utils/estree-parser';
+import { ESTreeParser } from '#/utils/estree-parser';
+import { Program } from '#/utils/estree-parser/types';
 
 describe('ESTreeParser', () => {
   const parsers = {

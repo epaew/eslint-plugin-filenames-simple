@@ -1,26 +1,20 @@
 import 'core-js/features/array/flat-map';
-import * as ESTree from 'estree';
-import { AST_NODE_TYPES, TSESTree as TSTree } from '@typescript-eslint/typescript-estree';
-
-// types
-type Maybe<T> = T | undefined;
-
-export type DestructuringPattern = ESTree.Pattern | TSTree.DestructuringPattern;
-export type ExportDeclaration = ESTree.Declaration | TSTree.ExportDeclaration | null;
-export type ExportAllDeclaration = TSTree.ExportAllDeclaration;
-export type ExportDefaultDeclaration = TSTree.ExportDefaultDeclaration;
-export type ExportNamedDeclaration = TSTree.ExportNamedDeclaration;
-export type ExportSpecifier = ESTree.ExportSpecifier | TSTree.ExportSpecifier;
-export type Identifier = ESTree.Identifier | TSTree.Identifier;
-export type Node = ESTree.Node | TSTree.Node;
-export type ObjectPattern = ESTree.ObjectPattern | TSTree.ObjectPattern;
-export type ObjectProperty = ESTree.AssignmentPattern | RestElement | TSTree.Property;
-export type Program = ESTree.Program | TSTree.Program;
-export type PropertyValue = TSTree.Property['value'];
-export type RestElement = ESTree.RestElement | TSTree.RestElement;
-export type Statement = ESTree.Statement | TSTree.Statement;
-export type VariableDeclaration = ESTree.VariableDeclaration | TSTree.VariableDeclaration;
-export type VariableDeclarator = ESTree.VariableDeclarator | TSTree.VariableDeclarator;
+import {
+  AST_NODE_TYPES,
+  DestructuringPattern,
+  ExportDeclaration,
+  ExportNamedDeclaration,
+  ExportSpecifier,
+  Identifier,
+  Maybe,
+  Node,
+  ObjectProperty,
+  Program,
+  PropertyValue,
+  Statement,
+  VariableDeclaration,
+  VariableDeclarator,
+} from './types';
 
 // functions
 const getStatementsFromProgram = <T extends Statement>(node: Program, statementType: T['type']) =>
