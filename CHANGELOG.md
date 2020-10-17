@@ -1,6 +1,9 @@
 # Unreleased
 ## Features
 ## Bugfixes
+* [#156](https://github.com/epaew/eslint-plugin-filenames-simple/pull/156)
+False positives when exported name does not strictly follow PascalCase.
+
 ## Others
 * [#51](https://github.com/epaew/eslint-plugin-filenames-simple/pull/51)
 Use `core-js` as replacement of my own polyfill implementation.
