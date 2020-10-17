@@ -1,6 +1,10 @@
 # Unreleased
 ## Features
 ## Bugfixes
+## Others
+
+# 0.5.0
+## Bugfixes
 * [#156](https://github.com/epaew/eslint-plugin-filenames-simple/pull/156)
 False positives when exported name does not strictly follow PascalCase.
 * [#158](https://github.com/epaew/eslint-plugin-filenames-simple/pull/158)
