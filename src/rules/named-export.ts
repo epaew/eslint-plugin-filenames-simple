@@ -1,8 +1,9 @@
+import 'core-js/features/array/flat-map';
+
 import path from 'path';
 import { Rule } from 'eslint';
+import { Identifier } from 'estree';
 
-import { ESTreeParser } from '../utils/estree-parser';
-import { Identifier, Program } from '../utils/estree-parser/types';
 import { presetRules } from '../utils/preset-rules';
 import { Pluralize } from '../utils/pluralize';
 
@@ -13,21 +14,6 @@ const fetchFilename = (context: Rule.RuleContext) => {
   const [dirname, basename] = absolutePath.split(path.sep).slice(-2);
   const [filename] = basename.split('.');
   return filename === 'index' && dirname !== '' ? dirname : filename;
-};
-
-const fetchTargets = (node: Program): Identifier[] => {
-  const programParser = new ESTreeParser(node);
-
-  const exportAllDeclarations = programParser.getExportAllDeclarationsFromProgram().unwrap();
-  const exportDefaultDeclarations = programParser
-    .getExportDefaultDeclarationsFromProgram()
-    .unwrap();
-  if (exportAllDeclarations.length !== 0 || exportDefaultDeclarations.length !== 0) return [];
-
-  return programParser
-    .getExportNamedDeclarationsFromProgram()
-    .getIdentifiersFromExportNamedDeclaration()
-    .unwrap() as Identifier[];
 };
 
 const getNameToCompare = (name: string) => name.replace(/[-_]/g, '').toLowerCase();
@@ -43,18 +29,44 @@ export const namedExport: Rule.RuleModule = {
     const pluralize = new Pluralize(context.settings?.['filenames-simple']?.pluralize);
     const rule: PluralizeRule = context.options[0] ?? 'always';
 
-    return {
-      Program: node => {
-        const filename = fetchFilename(context);
+    const filename = fetchFilename(context);
+    const exportedIdentifiers = new Set<Identifier>();
+    let isExportAllDetected = false;
+    let isExportDefaultDetected = false;
 
+    return {
+      ExportAllDeclaration: () => {
+        isExportAllDetected = true;
+      },
+      ExportDefaultDeclaration: () => {
+        isExportDefaultDetected = true;
+      },
+      ExportNamedDeclaration: node => {
+        if (node.declaration) {
+          // NOTE: https://eslint.org/docs/developer-guide/working-with-rules#the-context-object
+          //   > If the node is a FunctionDeclaration or FunctionExpression,
+          //   > the variable for the function name is returned,
+          //   > in addition to variables for the function parameters.
+          context
+            .getDeclaredVariables(node.declaration)
+            .flatMap(variable => variable.defs)
+            .filter(definition => definition.type !== 'Parameter')
+            .forEach(definition => exportedIdentifiers.add(definition.name));
+        } else {
+          node.specifiers.forEach(specifier => exportedIdentifiers.add(specifier.exported));
+        }
+      },
+      'Program:exit': () => {
         if (!(rule === 'always' || pluralize.isValidName(filename, rule))) return;
 
-        const [target, ...rest] = fetchTargets(node as Program);
-        if (!target || rest.length !== 0) return;
-        if (isSameName(target.name, filename)) return;
+        if (isExportAllDetected || isExportDefaultDetected) return;
+        if (exportedIdentifiers.size !== 1) return;
+
+        const [exportedIdentifier] = exportedIdentifiers;
+        if (isSameName(exportedIdentifier.name, filename)) return;
 
         context.report({
-          node: target,
+          node: exportedIdentifier,
           message:
             'The export name must match the filename. You need to rename to {{ pascalCase }} or {{ camelCase }}.',
           data: {
