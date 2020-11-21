@@ -26,7 +26,7 @@
     "prepack": "npm-run-all eslint test clean build",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --coverage --watchAll"
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "core-js": "^3.7.0",
