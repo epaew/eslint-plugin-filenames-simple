@@ -2,12 +2,56 @@ import 'core-js/features/array/flat-map';
 
 import path from 'path';
 import { Rule } from 'eslint';
-import { Identifier } from 'estree';
+import { ExportNamedDeclaration, Identifier } from 'estree';
 
 import { presetRules } from '../utils/preset-rules';
 import { Pluralize } from '../utils/pluralize';
 
 type PluralizeRule = 'always' | 'singular' | 'plural';
+
+class AloneNamedExportDetector {
+  #context: Pick<Rule.RuleContext, 'getDeclaredVariables'>;
+  #exportedIdentifiers = new Set<Identifier>();
+  #isExportAllDetected = false;
+  #isExportDefaultDetected = false;
+
+  constructor(context: Pick<Rule.RuleContext, 'getDeclaredVariables'>) {
+    this.#context = context;
+  }
+
+  get aloneNamedExport(): Identifier | void {
+    if (this.#isExportAllDetected || this.#isExportDefaultDetected) return;
+    if (this.#exportedIdentifiers.size !== 1) return;
+
+    return [...this.#exportedIdentifiers][0];
+  }
+
+  detectNamedExportDeclaration(node: ExportNamedDeclaration): void {
+    if (node.declaration) {
+      /*
+       * NOTE: https://eslint.org/docs/developer-guide/working-with-rules#the-context-object
+       *   > If the node is a FunctionDeclaration or FunctionExpression,
+       *   > the variable for the function name is returned,
+       *   > in addition to variables for the function parameters.
+       */
+      this.#context
+        .getDeclaredVariables(node.declaration)
+        .flatMap(variable => variable.defs)
+        .filter(definition => definition.type !== 'Parameter')
+        .forEach(definition => this.#exportedIdentifiers.add(definition.name));
+    } else {
+      node.specifiers.forEach(specifier => this.#exportedIdentifiers.add(specifier.exported));
+    }
+  }
+
+  detectExportAllDeclaration(): void {
+    this.#isExportAllDetected = true;
+  }
+
+  detectExportDefaultDeclaration(): void {
+    this.#isExportDefaultDetected = true;
+  }
+}
 
 const fetchFilename = (context: Rule.RuleContext) => {
   const absolutePath = path.resolve(context.getFilename());
@@ -30,39 +74,17 @@ export const namedExport: Rule.RuleModule = {
     const rule: PluralizeRule = context.options[0] ?? 'always';
 
     const filename = fetchFilename(context);
-    const exportedIdentifiers = new Set<Identifier>();
-    let isExportAllDetected = false;
-    let isExportDefaultDetected = false;
+    const detector = new AloneNamedExportDetector(context);
 
     return {
-      ExportAllDeclaration: () => {
-        isExportAllDetected = true;
-      },
-      ExportDefaultDeclaration: () => {
-        isExportDefaultDetected = true;
-      },
-      ExportNamedDeclaration: node => {
-        if (node.declaration) {
-          // NOTE: https://eslint.org/docs/developer-guide/working-with-rules#the-context-object
-          //   > If the node is a FunctionDeclaration or FunctionExpression,
-          //   > the variable for the function name is returned,
-          //   > in addition to variables for the function parameters.
-          context
-            .getDeclaredVariables(node.declaration)
-            .flatMap(variable => variable.defs)
-            .filter(definition => definition.type !== 'Parameter')
-            .forEach(definition => exportedIdentifiers.add(definition.name));
-        } else {
-          node.specifiers.forEach(specifier => exportedIdentifiers.add(specifier.exported));
-        }
-      },
+      ExportAllDeclaration: () => detector.detectExportAllDeclaration(),
+      ExportDefaultDeclaration: () => detector.detectExportDefaultDeclaration(),
+      ExportNamedDeclaration: node => detector.detectNamedExportDeclaration(node),
       'Program:exit': () => {
         if (!(rule === 'always' || pluralize.isValidName(filename, rule))) return;
 
-        if (isExportAllDetected || isExportDefaultDetected) return;
-        if (exportedIdentifiers.size !== 1) return;
-
-        const [exportedIdentifier] = exportedIdentifiers;
+        const exportedIdentifier = detector.aloneNamedExport;
+        if (!exportedIdentifier) return;
         if (isSameName(exportedIdentifier.name, filename)) return;
 
         context.report({
