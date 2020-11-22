@@ -8,5 +8,6 @@ export const all: Linter.BaseConfig = {
     'filenames-simple/naming-convention': 'error',
     'filenames-simple/no-index': 'error',
     'filenames-simple/pluralize': ['error', { parentDir: 'plural', file: 'singular' }],
+    'filenames-simple/typescript-module-declaration': 'error',
   },
 };
