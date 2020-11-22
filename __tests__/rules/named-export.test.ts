@@ -1,6 +1,7 @@
 import path from 'path';
 
 import { RuleTester } from 'eslint';
+
 import { namedExport } from '#/rules/named-export';
 
 describe('rules/named-export', () => {

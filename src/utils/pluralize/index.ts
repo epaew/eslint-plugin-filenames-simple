@@ -1,6 +1,7 @@
 import pluralize from 'pluralize';
 
 import { Dictionaries, PluralizeRule } from './types';
+
 export { Dictionaries, PluralizeRule };
 
 export class Pluralize {

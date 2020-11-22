@@ -1,4 +1,5 @@
 import { RuleTester } from 'eslint';
+
 import { namingConvention } from '#/rules/naming-convention';
 
 const ruleTester = new RuleTester();

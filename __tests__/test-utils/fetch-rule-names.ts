@@ -1,8 +1,10 @@
 import path from 'path';
+
 import glob from 'glob';
 
-import { presetRules } from '#/utils/preset-rules';
 import { asyncArrayFilter } from './async-array-filter';
+
+import { presetRules } from '#/utils/preset-rules';
 
 export const fetchAllRuleNames = () =>
   glob

@@ -1,4 +1,5 @@
 import path from 'path';
+
 import { Rule } from 'eslint';
 
 import { Pluralize, PluralizeRule } from '../utils/pluralize';

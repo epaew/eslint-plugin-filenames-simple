@@ -1,4 +1,5 @@
 import { RuleTester } from 'eslint';
+
 import { pluralize } from '#/rules/pluralize';
 import { Dictionaries } from '#/utils/pluralize';
 

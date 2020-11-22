@@ -1,4 +1,5 @@
 import { RuleTester } from 'eslint';
+
 import { noIndex } from '#/rules/no-index';
 
 const ruleTester = new RuleTester();

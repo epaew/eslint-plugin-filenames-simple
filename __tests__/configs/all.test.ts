@@ -1,6 +1,6 @@
-import { all } from '#/configs/all';
-
 import { fetchAvailableRuleNames } from '../test-utils/fetch-rule-names';
+
+import { all } from '#/configs/all';
 
 describe('Config of all must include all available rules', () => {
   const subject = (key: string) => all.rules?.[key];

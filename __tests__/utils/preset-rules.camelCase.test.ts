@@ -1,6 +1,6 @@
-import { presetRules } from '#/utils/preset-rules';
-
 import targetNames from './seeds.json';
+
+import { presetRules } from '#/utils/preset-rules';
 
 describe('presetRules.camelCase', () => {
   describe('.expression', () => {
