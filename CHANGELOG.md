@@ -1,5 +1,10 @@
 # Unreleased
 ## Features
+## Bugfixes
+## Others
+
+# 0.5.0
+## Features
 * [#199](https://github.com/epaew/eslint-plugin-filenames-simple/pull/199)
 Add new rule `typescript-module-declaration`.
 * [#202](https://github.com/epaew/eslint-plugin-filenames-simple/pull/202)
