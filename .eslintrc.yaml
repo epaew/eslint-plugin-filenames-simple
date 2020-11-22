@@ -2,18 +2,11 @@
 root: true
 env:
   es2017: true
-  node: true
 extends:
-  - eslint:recommended
-  - plugin:@typescript-eslint/recommended
-  - prettier
-  - plugin:prettier/recommended
-  - prettier/@typescript-eslint
+  - '@epaew/eslint-config/node-typescript'
   - plugin:filenames-simple/recommended
-parser: '@typescript-eslint/parser'
 parserOptions:
-  ecmaVersion: 2019
-  sourceType: module
+  ecmaVersion: 2018
 overrides:
   - files:
       - '__tests__/**'

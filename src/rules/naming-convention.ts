@@ -1,4 +1,5 @@
 import path from 'path';
+
 import { Rule } from 'eslint';
 
 import { getCaseValidator } from '../utils/case-validator';

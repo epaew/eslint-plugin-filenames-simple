@@ -1,6 +1,6 @@
-import { splitName } from '#/utils/split-name';
-
 import targetNames from './seeds.json';
+
+import { splitName } from '#/utils/split-name';
 
 describe('Split name written in camelCase', () => {
   const subject = (name: string) => splitName(name);

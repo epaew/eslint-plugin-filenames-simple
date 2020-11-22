@@ -1,12 +1,13 @@
 import path from 'path';
-import glob from 'glob';
 
-import { presetRules } from '#/utils/preset-rules';
+import { sync as globSync } from 'glob';
+
 import { asyncArrayFilter } from './async-array-filter';
 
+import { presetRules } from '#/utils/preset-rules';
+
 export const fetchAllRuleNames = () =>
-  glob
-    .sync(path.join(__dirname, '../../src/rules/*.ts'))
+  globSync(path.join(__dirname, '../../src/rules/*.ts'))
     .map(pathname => path.basename(pathname, '.ts'))
     .filter(name => name !== 'index');
 
