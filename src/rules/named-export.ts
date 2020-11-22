@@ -2,7 +2,7 @@ import 'core-js/features/array/flat-map';
 
 import path from 'path';
 
-import { TSESTree } from '@typescript-eslint/typescript-estree';
+import { TSESTree } from '@typescript-eslint/experimental-utils';
 import { Rule } from 'eslint';
 import { ExportNamedDeclaration, Identifier } from 'estree';
 

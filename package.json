@@ -40,7 +40,7 @@
     "@types/jest": "^26.0.15",
     "@types/node": "^14.14.9",
     "@types/pluralize": "^0.0.29",
-    "@typescript-eslint/typescript-estree": "^4.8.1",
+    "@typescript-eslint/experimental-utils": "^4.8.1",
     "eslint": "^7.13.0",
     "eslint-plugin-filenames-simple": "file:.",
     "glob": "^7.1.6",
