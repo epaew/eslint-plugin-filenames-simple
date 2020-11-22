@@ -352,6 +352,20 @@ describe('rules/named-export', () => {
           },
         ],
       });
+
+      ruleTester.run('single named export in module declaration', namedExport, {
+        valid: [
+          {
+            code: `
+              declare module 'espree' {
+                export function parse(code: string, options?: any): Node;
+              }
+            `,
+            filename: 'espree.d.ts',
+          },
+        ],
+        invalid: [],
+      });
     });
   });
 });
