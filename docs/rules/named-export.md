@@ -105,5 +105,13 @@ Specify one of the following as the file naming convention to which this rule ap
     export type ClassExpression = { id: Identifier }
     ```
 
+#### NOTE: This rule skips the detection of named exports in TypeScript module blocks.
+* @types/espree.d.ts
+    ```typescript
+    declare module 'espree' {
+      export function parse(code: string, options?: any): Node;
+    }
+    ```
+
 ## See also
 * [settings/pluralize](../settings/pluralize.md)

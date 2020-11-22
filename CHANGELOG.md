@@ -1,6 +1,9 @@
 # Unreleased
 ## Features
 ## Bugfixes
+* [#198](https://github.com/epaew/eslint-plugin-filenames-simple/pull/198)
+False positive detection of ExportNamedDeclaration in TSModuleBlock. (Mixed in [#196](https://github.com/epaew/eslint-plugin-filenames-simple/pull/196))
+
 ## Others
 * [#196](https://github.com/epaew/eslint-plugin-filenames-simple/pull/196)
 Refactor `rules/named-export` to use `context.getDeclaredVariables()`.
