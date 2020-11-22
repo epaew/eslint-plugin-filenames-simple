@@ -1,15 +1,17 @@
 import 'core-js/features/array/flat-map';
 
 import path from 'path';
+
+import { TSESTree } from '@typescript-eslint/typescript-estree';
 import { Rule } from 'eslint';
 import { ExportNamedDeclaration, Identifier } from 'estree';
 
-import { presetRules } from '../utils/preset-rules';
 import { Pluralize } from '../utils/pluralize';
+import { presetRules } from '../utils/preset-rules';
 
 type PluralizeRule = 'always' | 'singular' | 'plural';
 
-class AloneNamedExportDetector {
+class AloneExportNamedIdentifierDetector {
   #context: Pick<Rule.RuleContext, 'getDeclaredVariables'>;
   #exportedIdentifiers = new Set<Identifier>();
   #isExportAllDetected = false;
@@ -19,14 +21,16 @@ class AloneNamedExportDetector {
     this.#context = context;
   }
 
-  get aloneNamedExport(): Identifier | void {
+  get aloneExportNamedIdentifier(): Identifier | void {
     if (this.#isExportAllDetected || this.#isExportDefaultDetected) return;
     if (this.#exportedIdentifiers.size !== 1) return;
 
     return [...this.#exportedIdentifiers][0];
   }
 
-  detectNamedExportDeclaration(node: ExportNamedDeclaration): void {
+  detectExportNamedDeclaration(node: ExportNamedDeclaration): void {
+    if ((node as TSESTree.ExportNamedDeclaration).parent?.type === 'TSModuleBlock') return;
+
     if (node.declaration) {
       /*
        * NOTE: https://eslint.org/docs/developer-guide/working-with-rules#the-context-object
@@ -74,16 +78,16 @@ export const namedExport: Rule.RuleModule = {
     const rule: PluralizeRule = context.options[0] ?? 'always';
 
     const filename = fetchFilename(context);
-    const detector = new AloneNamedExportDetector(context);
+    const detector = new AloneExportNamedIdentifierDetector(context);
 
     return {
       ExportAllDeclaration: () => detector.detectExportAllDeclaration(),
       ExportDefaultDeclaration: () => detector.detectExportDefaultDeclaration(),
-      ExportNamedDeclaration: node => detector.detectNamedExportDeclaration(node),
+      ExportNamedDeclaration: node => detector.detectExportNamedDeclaration(node),
       'Program:exit': () => {
         if (!(rule === 'always' || pluralize.isValidName(filename, rule))) return;
 
-        const exportedIdentifier = detector.aloneNamedExport;
+        const exportedIdentifier = detector.aloneExportNamedIdentifier;
         if (!exportedIdentifier) return;
         if (isSameName(exportedIdentifier.name, filename)) return;
 
