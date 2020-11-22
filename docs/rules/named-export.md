@@ -81,8 +81,8 @@ Specify one of the following as the file naming convention to which this rule ap
 * src/config/index.js
     ```javascript
     // Multiple named export are ignored.
-    export * from './all';
-    export * from './recommended';
+    export { all } from './all';
+    export { recommended } from './recommended';
     ```
 
 ### You can also lint TypeScript notations

@@ -2,6 +2,8 @@
 ## Features
 ## Bugfixes
 ## Others
+* [#196](https://github.com/epaew/eslint-plugin-filenames-simple/pull/196)
+Refactor `rules/named-export` to use `context.getDeclaredVariables()`.
 
 # 0.5.0
 ## Bugfixes

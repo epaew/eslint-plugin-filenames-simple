@@ -72,23 +72,35 @@ describe('rules/named-export', () => {
           filename: 'module.js',
         },
         {
+          code: 'const [module] = [1]; export { module }',
+          filename: 'module.js',
+        },
+        {
+          code: 'const [...module] = [1]; export { module }',
+          filename: 'module.js',
+        },
+        {
+          code: 'const { module } = { module: 1 }; export { module }',
+          filename: 'module.js',
+        },
+        {
           code: 'export const rules = {}',
           filename: 'src/rules/index.js',
         },
         {
-          code: 'export function myFunction() { return 1; }',
+          code: 'export function myFunction(params) { return params; }',
           filename: 'my_function.js',
         },
         {
-          code: 'export const myFunction = function() { return 1; }',
+          code: 'export const myFunction = function(params) { return params; }',
           filename: 'MyFunction.js',
         },
         {
-          code: 'export const myFunction = function myFunction() { return 1; }',
+          code: 'export const myFunction = function myFunction(params) { return params; }',
           filename: 'MyFunction.js',
         },
         {
-          code: 'export const mySpecialFunction = () => { return 1; }',
+          code: 'export const mySpecialFunction = params => { return params; }',
           filename: 'MySpecialFunction.js',
         },
         {
@@ -107,6 +119,10 @@ describe('rules/named-export', () => {
         {
           code: 'export class ESTreeParser {}',
           filename: 'estree-parser.js',
+        },
+        {
+          code: "export { linter } from './linter'",
+          filename: 'linter/index.js',
         },
         {
           code: 'const module = 1; export { module }',
@@ -140,28 +156,28 @@ describe('rules/named-export', () => {
           ],
         },
         {
-          code: 'export function myFunction() { return 1; }',
+          code: 'export function myFunction(params) { return params; }',
           filename: 'function.js',
           errors: [
             'The export name must match the filename. You need to rename to Function or function.',
           ],
         },
         {
-          code: 'export const myFunction = function() { return 1; }',
+          code: 'export const myFunction = function(params) { return params; }',
           filename: 'function.js',
           errors: [
             'The export name must match the filename. You need to rename to Function or function.',
           ],
         },
         {
-          code: 'export const myFunction = function myFunction() { return 1; }',
+          code: 'export const myFunction = function myFunction(params) { return params; }',
           filename: 'function.js',
           errors: [
             'The export name must match the filename. You need to rename to Function or function.',
           ],
         },
         {
-          code: 'export const mySpecialFunction = () => { return 1; }',
+          code: 'export const mySpecialFunction = params => { return params; }',
           filename: 'function.js',
           errors: [
             'The export name must match the filename. You need to rename to Function or function.',
@@ -188,117 +204,154 @@ describe('rules/named-export', () => {
             'The export name must match the filename. You need to rename to Klass or klass.',
           ],
         },
+        {
+          code: "export { linter } from './linter'",
+          filename: 'linters/index.js',
+          errors: [
+            'The export name must match the filename. You need to rename to Linters or linters.',
+          ],
+        },
       ],
     });
   };
 
   describe('with eslint default parser (Espree)', () => {
-    const ruleTester = new RuleTester({
-      parserOptions: { ecmaVersion: '2015', sourceType: 'module' },
+    describe('with ecmaVersion 2015', () => {
+      const ruleTester = new RuleTester({
+        parserOptions: { ecmaVersion: '2015', sourceType: 'module' },
+      });
+
+      sharedTests(ruleTester);
     });
 
-    sharedTests(ruleTester);
+    describe('with ecmaVersion 2018', () => {
+      const ruleTester = new RuleTester({
+        parserOptions: { ecmaVersion: '2018', sourceType: 'module' },
+      });
+
+      ruleTester.run('single named export', namedExport, {
+        valid: [
+          {
+            code: 'const { module, ...rest } = { module: 1 }; export { rest }',
+            filename: 'rest.js',
+          },
+        ],
+        invalid: [
+          {
+            code: 'const { module, ...rest } = { module: 1 }; export { rest }',
+            filename: 'module.js',
+            errors: [
+              'The export name must match the filename. You need to rename to Module or module.',
+            ],
+          },
+        ],
+      });
+    });
   });
 
   describe('with @typescript-eslint/parser', () => {
-    const ruleTester = new RuleTester({
-      parser: path.resolve(__dirname, '../../node_modules/@typescript-eslint/parser'),
-      parserOptions: { ecmaVersion: '2015', sourceType: 'module' },
-    });
+    describe('with ecmaVersion 2015', () => {
+      const ruleTester = new RuleTester({
+        parser: path.resolve(__dirname, '../../node_modules/@typescript-eslint/parser'),
+        parserOptions: { ecmaVersion: '2015', sourceType: 'module' },
+      });
 
-    sharedTests(ruleTester);
+      sharedTests(ruleTester);
 
-    ruleTester.run('default export', namedExport, {
-      valid: [
-        {
-          code: 'const module: number = 1; export default module',
-          filename: 'mod.ts',
-        },
-      ],
-      invalid: [],
-    });
+      ruleTester.run('default export', namedExport, {
+        valid: [
+          {
+            code: 'const module: number = 1; export default module',
+            filename: 'mod.ts',
+          },
+        ],
+        invalid: [],
+      });
 
-    ruleTester.run('multiple named export', namedExport, {
-      valid: [
-        {
-          code: `
+      ruleTester.run('multiple named export', namedExport, {
+        valid: [
+          {
+            code: `
             export type Type = { n: number };
             export interface Interface { s: string }
           `,
-          filename: 'module.ts',
-        },
-        {
-          code: `
+            filename: 'module.ts',
+          },
+          {
+            code: `
             const module1: any[] = [];
             const module2: { key: string } = { key: 'string' };
             export { module1, module2 }
           `,
-          filename: 'module.ts',
-        },
-      ],
-      invalid: [],
-    });
+            filename: 'module.ts',
+          },
+        ],
+        invalid: [],
+      });
 
-    ruleTester.run('single named export with default/all export', namedExport, {
-      valid: [
-        {
-          code: "export const extraModule: number = 1; export * from 'some-module'",
-          filename: 'module.ts',
-        },
-        {
-          code: "export const extraModule: number = 1; export default { key: 'value' };",
-          filename: 'module.ts',
-        },
-      ],
-      invalid: [],
-    });
+      ruleTester.run('single named export with default/all export', namedExport, {
+        valid: [
+          {
+            code: "export const extraModule: number = 1; export * from 'some-module'",
+            filename: 'module.ts',
+          },
+          {
+            code: "export const extraModule: number = 1; export default { key: 'value' };",
+            filename: 'module.ts',
+          },
+        ],
+        invalid: [],
+      });
 
-    ruleTester.run('single named export', namedExport, {
-      // See https://github.com/typescript-eslint/typescript-eslint/blob/50a46c60fb81d8434aa4268a13d17d8fcf499e21/packages/types/src/ts-estree.ts#L347
-      valid: [
-        {
-          code: 'export enum Role { Admin, Operator }',
-          filename: 'role.ts',
-        },
-        {
-          code: 'export interface User { name: string; }',
-          filename: 'user.ts',
-        },
-        {
-          code: "export module Module { const val: string = 'module.val'; }",
-          filename: 'module.ts',
-        },
-        {
-          code: 'export type Empty = {}',
-          filename: 'empty.ts',
-        },
-      ],
-      invalid: [
-        {
-          code: 'export enum Role { Admin, Operator }',
-          filename: 'user-role.ts',
-          errors: [
-            'The export name must match the filename. You need to rename to UserRole or userRole.',
-          ],
-        },
-        {
-          code: 'export interface Person { name: string; }',
-          filename: 'user.ts',
-          errors: ['The export name must match the filename. You need to rename to User or user.'],
-        },
-        {
-          code: "export module Module { const val: string = 'module.val'; }",
-          filename: 'mod.ts',
-          errors: ['The export name must match the filename. You need to rename to Mod or mod.'],
-        },
-        {
-          code: 'export type Blank = {}',
-          filename: 'empty.ts',
-          errors: [
-            'The export name must match the filename. You need to rename to Empty or empty.',
-          ],
-        },
-      ],
+      ruleTester.run('single named export', namedExport, {
+        // See https://github.com/typescript-eslint/typescript-eslint/blob/50a46c60fb81d8434aa4268a13d17d8fcf499e21/packages/types/src/ts-estree.ts#L347
+        valid: [
+          {
+            code: 'export enum Role { Admin, Operator }',
+            filename: 'role.ts',
+          },
+          {
+            code: 'export interface User { name: string; }',
+            filename: 'user.ts',
+          },
+          {
+            code: "export module Module { const val: string = 'module.val'; }",
+            filename: 'module.ts',
+          },
+          {
+            code: 'export type Empty = {}',
+            filename: 'empty.ts',
+          },
+        ],
+        invalid: [
+          {
+            code: 'export enum Role { Admin, Operator }',
+            filename: 'user-role.ts',
+            errors: [
+              'The export name must match the filename. You need to rename to UserRole or userRole.',
+            ],
+          },
+          {
+            code: 'export interface Person { name: string; }',
+            filename: 'user.ts',
+            errors: [
+              'The export name must match the filename. You need to rename to User or user.',
+            ],
+          },
+          {
+            code: "export module Module { const val: string = 'module.val'; }",
+            filename: 'mod.ts',
+            errors: ['The export name must match the filename. You need to rename to Mod or mod.'],
+          },
+          {
+            code: 'export type Blank = {}',
+            filename: 'empty.ts',
+            errors: [
+              'The export name must match the filename. You need to rename to Empty or empty.',
+            ],
+          },
+        ],
+      });
     });
   });
 });
