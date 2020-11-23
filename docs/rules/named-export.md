@@ -30,11 +30,13 @@ Specify one of the following as the file naming convention to which this rule ap
 ### Basic
 * module.js
     ```javascript
-    export const module = 1; // OK
+    // OK
+    export const module = 1;
     ```
 * module.js
     ```javascript
-    export const mod = 1; // NG: You can use `module` or `Module` as export name.
+    // NG: You can use `mod.js` or `Mod.js` as filename.
+    export const mod = 1;
     ```
 
 * module.js
@@ -58,24 +60,25 @@ Specify one of the following as the file naming convention to which this rule ap
     export const extraModule = { key: 'value' };
     ```
 
-### When the filename contains two or more words
+### When the name of exported module contains two or more words
 * my-class.js
     ```javascript
     /*
-     * When the filename is written in kebab-case, camelCase or PascalCase,
-     * the export name can be written in `camelCase` or `PascalCase`
+     * When the name of exported module is written in camelCase or PascalCase,
+     * the filename can be written in `kebab-case`, `camelCase` or `PascalCase`
      */
     export class MyClass {}
     ```
 * myFunction.js
     ```javascript
-    export function myFunction() {} // `MyFunction()` is also OK.
+    // `my-function.js`, `MyFunction.js` is also OK.
+    export function myFunction() {}
     ```
 
 ### When the filename is `index.js` (`index.ts`)
 * src/rules/index.js
     ```javascript
-    // You can use parent directory name as export name.
+    // The rule checks the parent directory name with the name of exported module.
     export const rules = {};
     ```
 * src/config/index.js
