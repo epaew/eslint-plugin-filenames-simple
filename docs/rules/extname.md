@@ -1,4 +1,4 @@
-# filenames-simple/extname
+# (deprecated) filenames-simple/extname
 This rule enforces file extensions to lowercase/UPPERCASE (and numbers).
 
 ## Configuration example
