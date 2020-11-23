@@ -38,7 +38,6 @@ This plugin is inspired by [eslint-plugin-filenames](https://github.com/selaux/e
         "filenames-simple"
       ],
       "rules": {
-        "filenames-simple/extname": ["error", "lowercase"],
         "filenames-simple/naming-convention": ["error", { "rule": "kebab-case" }]
       }
     }
@@ -52,7 +51,6 @@ This plugin is inspired by [eslint-plugin-filenames](https://github.com/selaux/e
     ```
 
 ## Available rules
-* [extname](./docs/rules/extname.md)
 * [named-export](./docs/rules/named-export.md)
 * [naming-convention](./docs/rules/naming-convention.md)
 * [no-index](./docs/rules/no-index.md)

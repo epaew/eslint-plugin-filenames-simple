@@ -18,6 +18,7 @@ export const extname: Rule.RuleModule = {
         default: 'lowercase',
       },
     ],
+    deprecated: true,
   },
   create: context => {
     const style: keyof typeof REGEXP = context.options[0] ?? 'lowercase';

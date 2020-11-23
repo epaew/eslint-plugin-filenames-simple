@@ -8,7 +8,7 @@ import { typescriptModuleDeclaration } from './typescript-module-declaration';
 
 export const rules = {
   casing, // NOTE: Deprecated, I will remove this at v1.0.0
-  extname,
+  extname, // NOTE: Deprecated, I will remove this at v1.0.0
   'named-export': namedExport,
   'naming-convention': namingConvention,
   'no-index': noIndex,

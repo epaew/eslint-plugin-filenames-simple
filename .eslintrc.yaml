@@ -15,4 +15,3 @@ overrides:
       - filenames-simple
     rules:
       '@typescript-eslint/explicit-module-boundary-types': off
-      filenames-simple/extname: off
