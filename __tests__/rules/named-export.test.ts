@@ -140,76 +140,111 @@ describe('rules/named-export', () => {
         {
           code: 'const module = 1; export { module }',
           filename: 'mod.js',
-          errors: ['The export name must match the filename. You need to rename to Mod or mod.'],
+          errors: [
+            {
+              messageId: 'invalidFilename',
+              data: { filename: 'module', extname: 'js' },
+            },
+          ],
         },
         {
           code: 'const module = 1; export { module as mod }',
           filename: 'my-module.js',
           errors: [
-            'The export name must match the filename. You need to rename to MyModule or myModule.',
+            {
+              messageId: 'invalidFilename',
+              data: { filename: 'mod', extname: 'js' },
+            },
           ],
         },
         {
           code: 'export const rule = {}',
           filename: 'src/rules/index.js',
           errors: [
-            'The export name must match the filename. You need to rename to Rules or rules.',
+            {
+              messageId: 'invalidFilename',
+              data: { filename: 'rule', extname: 'js' },
+            },
           ],
         },
         {
           code: 'export function myFunction(params) { return params; }',
           filename: 'function.js',
           errors: [
-            'The export name must match the filename. You need to rename to Function or function.',
+            {
+              messageId: 'invalidFilename',
+              data: { filename: 'my-function', extname: 'js' },
+            },
           ],
         },
         {
           code: 'export const myFunction = function(params) { return params; }',
           filename: 'function.js',
           errors: [
-            'The export name must match the filename. You need to rename to Function or function.',
+            {
+              messageId: 'invalidFilename',
+              data: { filename: 'my-function', extname: 'js' },
+            },
           ],
         },
         {
           code: 'export const myFunction = function myFunction(params) { return params; }',
           filename: 'function.js',
           errors: [
-            'The export name must match the filename. You need to rename to Function or function.',
+            {
+              messageId: 'invalidFilename',
+              data: { filename: 'my-function', extname: 'js' },
+            },
           ],
         },
         {
           code: 'export const mySpecialFunction = params => { return params; }',
           filename: 'function.js',
           errors: [
-            'The export name must match the filename. You need to rename to Function or function.',
+            {
+              messageId: 'invalidFilename',
+              data: { filename: 'my-special-function', extname: 'js' },
+            },
           ],
         },
         {
           code: 'export class MyClass {}',
           filename: 'klass.js',
           errors: [
-            'The export name must match the filename. You need to rename to Klass or klass.',
+            {
+              messageId: 'invalidFilename',
+              data: { filename: 'my-class', extname: 'js' },
+            },
           ],
         },
         {
           code: 'export const MySpecialClass = class {}',
           filename: 'klass.js',
           errors: [
-            'The export name must match the filename. You need to rename to Klass or klass.',
+            {
+              messageId: 'invalidFilename',
+              data: { filename: 'my-special-class', extname: 'js' },
+            },
           ],
         },
         {
           code: 'export const MySpecialClass = class MyClass extends MyBaseClass {}',
           filename: 'klass.js',
           errors: [
-            'The export name must match the filename. You need to rename to Klass or klass.',
+            {
+              messageId: 'invalidFilename',
+              data: { filename: 'my-special-class', extname: 'js' },
+            },
           ],
         },
         {
           code: "export { linter } from './linter'",
           filename: 'linters/index.js',
           errors: [
-            'The export name must match the filename. You need to rename to Linters or linters.',
+            {
+              messageId: 'invalidFilename',
+              data: { filename: 'linter', extname: 'js' },
+            },
           ],
         },
       ],
@@ -242,7 +277,10 @@ describe('rules/named-export', () => {
             code: 'const { module, ...rest } = { module: 1 }; export { rest }',
             filename: 'module.js',
             errors: [
-              'The export name must match the filename. You need to rename to Module or module.',
+              {
+                messageId: 'invalidFilename',
+                data: { filename: 'rest', extname: 'js' },
+              },
             ],
           },
         ],
@@ -329,26 +367,40 @@ describe('rules/named-export', () => {
             code: 'export enum Role { Admin, Operator }',
             filename: 'user-role.ts',
             errors: [
-              'The export name must match the filename. You need to rename to UserRole or userRole.',
+              {
+                messageId: 'invalidFilename',
+                data: { filename: 'role', extname: 'ts' },
+              },
             ],
           },
           {
             code: 'export interface Person { name: string; }',
             filename: 'user.ts',
             errors: [
-              'The export name must match the filename. You need to rename to User or user.',
+              {
+                messageId: 'invalidFilename',
+                data: { filename: 'person', extname: 'ts' },
+              },
             ],
           },
           {
             code: "export module Module { const val: string = 'module.val'; }",
             filename: 'mod.ts',
-            errors: ['The export name must match the filename. You need to rename to Mod or mod.'],
+            errors: [
+              {
+                messageId: 'invalidFilename',
+                data: { filename: 'module', extname: 'ts' },
+              },
+            ],
           },
           {
             code: 'export type Blank = {}',
             filename: 'empty.ts',
             errors: [
-              'The export name must match the filename. You need to rename to Empty or empty.',
+              {
+                messageId: 'invalidFilename',
+                data: { filename: 'blank', extname: 'ts' },
+              },
             ],
           },
         ],
