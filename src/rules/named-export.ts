@@ -57,11 +57,15 @@ class AloneExportNamedIdentifierDetector {
   }
 }
 
-const fetchFilename = (context: Rule.RuleContext) => {
+const fetchFilename = (context: Pick<Rule.RuleContext, 'getFilename'>): [string, string] => {
   const absolutePath = path.resolve(context.getFilename());
-  const [dirname, basename] = absolutePath.split(path.sep).slice(-2);
-  const [filename] = basename.split('.');
-  return filename === 'index' && dirname !== '' ? dirname : filename;
+  const [parentDirname, basename] = absolutePath.split(path.sep).slice(-2);
+  const [filename, ...extnames] = basename.split('.');
+
+  return [
+    filename === 'index' && parentDirname !== '' ? parentDirname : filename,
+    extnames.join('.'),
+  ];
 };
 
 const getNameToCompare = (name: string) => name.replace(/[-_]/g, '').toLowerCase();
@@ -71,13 +75,18 @@ const isSameName = (name1: string, name2: string): boolean =>
 export const namedExport: Rule.RuleModule = {
   meta: {
     type: 'suggestion',
+    messages: {
+      invalidFilename:
+        'The filename/dirname does not match the exported module name.' +
+        'We recommend renaming to `{{ filename }}.{{ extname }}` or `{{ filename }}/index.{{ extname }}`.',
+    },
     schema: [{ enum: ['always', 'singular', 'plural'] }],
   },
   create: context => {
     const pluralize = new Pluralize(context.settings?.['filenames-simple']?.pluralize);
     const rule: PluralizeRule = context.options[0] ?? 'always';
 
-    const filename = fetchFilename(context);
+    const [filename, extname] = fetchFilename(context);
     const detector = new AloneExportNamedIdentifierDetector(context);
 
     return {
@@ -93,11 +102,10 @@ export const namedExport: Rule.RuleModule = {
 
         context.report({
           node: exportedIdentifier,
-          message:
-            'The export name must match the filename. You need to rename to {{ pascalCase }} or {{ camelCase }}.',
+          messageId: 'invalidFilename',
           data: {
-            pascalCase: presetRules.PascalCase.recommendationBuilder(filename),
-            camelCase: presetRules.camelCase.recommendationBuilder(filename),
+            filename: presetRules['kebab-case'].recommendationBuilder(exportedIdentifier.name),
+            extname,
           },
         });
       },
