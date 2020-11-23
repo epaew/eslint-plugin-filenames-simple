@@ -1,3 +1,4 @@
+import { Rule } from 'eslint';
 import pluralize from 'pluralize';
 
 import { Dictionaries, PluralizeRule } from './types';
@@ -40,3 +41,8 @@ export class Pluralize {
     uncountable && uncountable.forEach(this.#pluralize.addUncountableRule);
   }
 }
+
+export const getPluralize = (context: Pick<Rule.RuleContext, 'settings'>): Pluralize => {
+  const dictionaries = context.settings?.['filenames-simple']?.pluralize;
+  return new Pluralize(dictionaries);
+};

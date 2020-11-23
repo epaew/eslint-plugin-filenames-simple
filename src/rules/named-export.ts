@@ -6,7 +6,7 @@ import { TSESTree } from '@typescript-eslint/experimental-utils';
 import { Rule } from 'eslint';
 import { ExportNamedDeclaration, Identifier } from 'estree';
 
-import { Pluralize } from '../utils/pluralize';
+import { getPluralize } from '../utils/pluralize';
 import { presetRules } from '../utils/preset-rules';
 
 type PluralizeRule = 'always' | 'singular' | 'plural';
@@ -83,7 +83,7 @@ export const namedExport: Rule.RuleModule = {
     schema: [{ enum: ['always', 'singular', 'plural'] }],
   },
   create: context => {
-    const pluralize = new Pluralize(context.settings?.['filenames-simple']?.pluralize);
+    const pluralize = getPluralize(context);
     const rule: PluralizeRule = context.options[0] ?? 'always';
 
     const [filename, extname] = fetchFilename(context);
