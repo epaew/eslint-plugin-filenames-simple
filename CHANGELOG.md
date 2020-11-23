@@ -6,6 +6,8 @@ Add new rule `typescript-module-declaration`.
 ## Bugfixes
 * [#198](https://github.com/epaew/eslint-plugin-filenames-simple/pull/198)
 False positive detection of ExportNamedDeclaration in TSModuleBlock. (Mixed in [#196](https://github.com/epaew/eslint-plugin-filenames-simple/pull/196))
+* [#200](https://github.com/epaew/eslint-plugin-filenames-simple/pull/200)
+Fix the message of the rule `named-export` reports.
 
 ## Others
 * [#196](https://github.com/epaew/eslint-plugin-filenames-simple/pull/196)
