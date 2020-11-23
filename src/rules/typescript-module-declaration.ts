@@ -24,23 +24,20 @@ export const typescriptModuleDeclaration: TSESLint.RuleModule<'invalidFilename',
     schema: [],
   },
   create: context => {
-    let program: TSESTree.Program;
     const moduleIdentifiers = new Set<TSESTree.Identifier | TSESTree.Literal>();
 
     return {
-      Program: node => {
-        program = node;
-      },
       TSModuleDeclaration: node => {
         if (node.parent?.type === 'Program') moduleIdentifiers.add(node.id);
       },
       'Program:exit': () => {
         if (moduleIdentifiers.size !== 1) return;
-        const moduleName = getModuleName([...moduleIdentifiers][0]);
+        const moduleIdentifier = [...moduleIdentifiers][0];
+        const moduleName = getModuleName(moduleIdentifier);
 
         if (!compareFilenameAndModuleName(getAbsoluteFilename(context), moduleName)) {
           context.report({
-            node: program,
+            node: moduleIdentifier,
             messageId: 'invalidFilename',
             data: { filename: `${moduleName}.d.ts` },
           });
