@@ -2,7 +2,7 @@ import path from 'path';
 
 import { Rule } from 'eslint';
 
-import { Pluralize, PluralizeRule } from '../utils/pluralize';
+import { getPluralize, PluralizeRule } from '../utils/pluralize';
 
 type Rules = {
   parentDir?: 'singular' | 'plural';
@@ -32,7 +32,7 @@ export const pluralize: Rule.RuleModule = {
     ],
   },
   create: context => {
-    const pluralize = new Pluralize(context.settings?.['filenames-simple']?.pluralize);
+    const pluralize = getPluralize(context);
     const rules: Rules = context.options[0] ?? {};
 
     const correctedName = (name: string, rule?: PluralizeRule) =>
