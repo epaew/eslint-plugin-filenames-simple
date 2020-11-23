@@ -1,5 +1,8 @@
 # Unreleased
 ## Features
+* [#199](https://github.com/epaew/eslint-plugin-filenames-simple/pull/199)
+Add new rule `typescript-module-declaration`.
+
 ## Bugfixes
 * [#198](https://github.com/epaew/eslint-plugin-filenames-simple/pull/198)
 False positive detection of ExportNamedDeclaration in TSModuleBlock. (Mixed in [#196](https://github.com/epaew/eslint-plugin-filenames-simple/pull/196))
