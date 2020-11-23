@@ -57,6 +57,7 @@ This plugin is inspired by [eslint-plugin-filenames](https://github.com/selaux/e
 * [naming-convention](./docs/rules/naming-convention.md)
 * [no-index](./docs/rules/no-index.md)
 * [pluralize](./docs/rules/pluralize.md)
+* [typescript-module-declaration](./docs/rules/typescript-module-declaration.md)
 
 ## CHANGELOG
 [CHANGELOG](./CHANGELOG.md)

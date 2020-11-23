@@ -8,6 +8,7 @@ export const recommended: Linter.BaseConfig = {
     'filenames-simple/naming-convention': 'error',
     'filenames-simple/no-index': 'off',
     'filenames-simple/pluralize': 'off',
+    'filenames-simple/typescript-module-declaration': 'error',
   },
 };
 
