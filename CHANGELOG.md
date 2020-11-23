@@ -2,6 +2,9 @@
 ## Features
 * [#199](https://github.com/epaew/eslint-plugin-filenames-simple/pull/199)
 Add new rule `typescript-module-declaration`.
+* [#202](https://github.com/epaew/eslint-plugin-filenames-simple/pull/202)
+  * Deprecates the rule `extname`
+  * Add new rule `extension`
 
 ## Bugfixes
 * [#198](https://github.com/epaew/eslint-plugin-filenames-simple/pull/198)
