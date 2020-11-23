@@ -1,9 +1,10 @@
 {
   "name": "eslint-plugin-filenames-simple",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "An ESLint plugin to check filenames with simple configuration",
   "keywords": [
     "eslint",
+    "eslintPlugin",
     "eslint-plugin",
     "file",
     "filename",
