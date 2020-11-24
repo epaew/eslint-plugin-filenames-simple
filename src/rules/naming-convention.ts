@@ -38,7 +38,7 @@ export const namingConvention: Rule.RuleModule = {
 
     return {
       Program: node => {
-        const [filename, ...rest] = path.basename(context.getFilename()).split('.');
+        const { name: filename, ext: extension } = path.parse(context.getFilename());
 
         if (filename.length === 0) {
           context.report({ node, message: 'The filename is empty' });
@@ -49,7 +49,7 @@ export const namingConvention: Rule.RuleModule = {
         const suggestion = (() => {
           try {
             const recommendedName = validator.getRecommendedName(filename);
-            return ` Should rename to ${[recommendedName, ...rest].join('.')}.`;
+            return ` Should rename to ${recommendedName}${extension}.`;
           } catch {
             // nothing to do
           }
