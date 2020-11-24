@@ -1,5 +1,3 @@
-import { splitName } from './split-name';
-
 type Rule = {
   expression: RegExp;
   recommendationBuilder?: (name: string) => string;
@@ -10,6 +8,17 @@ type PresetRules = {
   'kebab-case': Required<Rule>;
   PascalCase: Required<Rule>;
   snake_case: Required<Rule>;
+};
+
+/*
+ * Split the file/variable name written in camelCase, kebab-case, PascalCase, and snake_case.
+ */
+const splitName = (name: string): string[] => {
+  return name
+    .replace(/_/g, '-')
+    .replace(/([a-z0-9])([A-Z])|([A-Z])([A-Z])(?=[a-z])/g, '$1$3-$2$4')
+    .toLowerCase()
+    .split('-');
 };
 
 export const presetRules: PresetRules = {
