@@ -15,6 +15,14 @@ Specify the file extensions you want to explicitly allow to use.
 - .ts
 - .tsx
 - .vue
+- .spec.js
+- .spec.jsx
+- .spec.ts
+- .spec.tsx
+- .test.js
+- .test.jsx
+- .test.ts
+- .test.tsx
 
 ## Configuration example
 ```json
