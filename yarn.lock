@@ -280,7 +280,6 @@
 
 "@epaew/eslint-config@git://github.com/epaew/eslint-config.git#master":
   version "0.1.0"
-  uid "19ed7cb462ac91e267ce914699e4cc8bbec9d2a9"
   resolved "git://github.com/epaew/eslint-config.git#19ed7cb462ac91e267ce914699e4cc8bbec9d2a9"
   dependencies:
     "@typescript-eslint/eslint-plugin" "^4.8.2"
@@ -1264,7 +1263,7 @@ copy-descriptor@^0.1.0:
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
-core-js@^3.6.5, core-js@^3.8.0:
+core-js@^3.8.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.8.0.tgz#0fc2d4941cadf80538b030648bb64d230b4da0ce"
   integrity sha512-W2VYNB0nwQQE7tKS7HzXd7r2y/y2SVJl4ga6oH/dnaLFzM0o2lB2P3zCkWj5Wc/zyMYjtgd5Hmhk0ObkQFZOIA==
@@ -1611,15 +1610,7 @@ eslint-plugin-eslint-comments@^3.2.0:
     escape-string-regexp "^1.0.5"
     ignore "^5.0.5"
 
-eslint-plugin-filenames-simple@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-filenames-simple/-/eslint-plugin-filenames-simple-0.5.0.tgz#042fab3637aaffa7e226f2fcd6d46c4b84885d70"
-  integrity sha512-HJEndLQoO9ryZrELliW4Q+HahWvR+28MdRoK3WhOXG+Mg5sgr5sj5aBo4bzzjvc1OuJjDzhxIWD3SsVmT814gg==
-  dependencies:
-    core-js "^3.6.5"
-    pluralize "^8.0.0"
-
-"eslint-plugin-filenames-simple@file:.":
+eslint-plugin-filenames-simple@^0.5.0, "eslint-plugin-filenames-simple@file:.":
   version "0.6.0"
   dependencies:
     core-js "^3.8.0"

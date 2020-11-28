@@ -6,7 +6,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 */3 * *'
 
 jobs:
   jest:
@@ -39,7 +39,7 @@ jobs:
           restore-keys: ${{ runner.os }}-yarn-
 
       - run: yarn install --frozen-lockfile
-      - run: yarn remove eslint && yarn add eslint@${{ matrix.eslint }}
+      - run: yarn add eslint@${{ matrix.eslint }}
 
       - name: yarn run test && report coverage
         uses: paambaati/codeclimate-action@v2.6.0
