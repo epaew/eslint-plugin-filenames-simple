@@ -24,11 +24,17 @@
     "console": "ts-node",
     "eslint": "eslint .",
     "eslint:fix": "eslint --fix .",
+    "link": "yarn link && yarn link eslint-plugin-filenames-simple",
+    "unlink": "yarn unlink",
     "prepack": "npm-run-all eslint test clean build",
+    "prepare": "npm-run-all clean build link",
     "test": "jest",
     "test:ci": "jest --ci --coverage",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
+  },
+  "resolutions": {
+    "eslint-plugin-filenames-simple": "file:."
   },
   "dependencies": {
     "core-js": "^3.8.0",
