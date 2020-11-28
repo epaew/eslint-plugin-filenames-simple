@@ -24,14 +24,20 @@
     "console": "ts-node",
     "eslint": "eslint .",
     "eslint:fix": "eslint --fix .",
+    "link": "yarn link && yarn link eslint-plugin-filenames-simple",
+    "unlink": "yarn unlink",
     "prepack": "npm-run-all eslint test clean build",
+    "prepare": "npm-run-all clean build link",
     "test": "jest",
     "test:ci": "jest --ci --coverage",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
   },
+  "resolutions": {
+    "eslint-plugin-filenames-simple": "file:."
+  },
   "dependencies": {
-    "core-js": "^3.7.0",
+    "core-js": "^3.8.0",
     "pluralize": "^8.0.0"
   },
   "devDependencies": {
@@ -39,10 +45,10 @@
     "@types/eslint": "^7.2.5",
     "@types/glob": "^7.1.1",
     "@types/jest": "^26.0.15",
-    "@types/node": "^14.14.9",
+    "@types/node": "^14.14.10",
     "@types/pluralize": "^0.0.29",
-    "@typescript-eslint/experimental-utils": "^4.8.1",
-    "eslint": "^7.13.0",
+    "@typescript-eslint/experimental-utils": "^4.8.2",
+    "eslint": "^7.14.0",
     "eslint-plugin-filenames-simple": "file:.",
     "glob": "^7.1.6",
     "jest": "^26.6.3",
