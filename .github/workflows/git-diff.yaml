@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - master
+      - next
 
 jobs:
   list-diff:
@@ -21,7 +22,7 @@ jobs:
         id: changed-files
         run: |
           echo "::set-output name=diff::" \
-            "$(git diff --diff-filter=d --name-only origin/${{ github.base_ref }} | tr '\n' ' ')"
+            "$(git diff --name-only origin/${{ github.base_ref }} | tr '\n' ' ')"
 
   check-files-included:
     name: Check ${{ matrix.target }} is/are changed
@@ -45,5 +46,5 @@ jobs:
       - name: Check ${{ matrix.target }} is updated.
         if: ${{ matrix.when }}
         run: |
-          git diff --diff-filter=d --name-only origin/${{ github.base_ref }} \
+          git diff --name-only origin/${{ github.base_ref }} \
             | grep -E "^${{ matrix.target }}$"
