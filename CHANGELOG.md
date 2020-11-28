@@ -3,10 +3,6 @@
 ## Bugfixes
 ## Others
 
-# 1.0.0 (Unreleased)
-## BREAKING CHANGES
-* [#208](https://github.com/epaew/eslint-plugin-filenames-simple/pull/208) Remove deprecated rules.
-
 # 0.5.0
 ## Features
 * [#199](https://github.com/epaew/eslint-plugin-filenames-simple/pull/199)
