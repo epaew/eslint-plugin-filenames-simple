@@ -37,7 +37,7 @@
     "eslint-plugin-filenames-simple": "file:."
   },
   "dependencies": {
-    "core-js": "^3.11.0",
+    "core-js": "^3.11.1",
     "pluralize": "^8.0.0"
   },
   "devDependencies": {
