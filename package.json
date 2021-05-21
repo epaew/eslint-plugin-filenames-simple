@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@epaew/eslint-config": "git://github.com/epaew/eslint-config.git#master",
-    "@types/eslint": "^7.2.10",
+    "@types/eslint": "^7.2.11",
     "@types/glob": "^7.1.1",
     "@types/jest": "^26.0.23",
     "@types/node": "^15.0.3",
