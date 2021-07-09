@@ -44,7 +44,7 @@
     "@epaew/eslint-config": "git://github.com/epaew/eslint-config.git#master",
     "@types/eslint": "^7.2.14",
     "@types/glob": "^7.1.4",
-    "@types/jest": "^26.0.23",
+    "@types/jest": "^26.0.24",
     "@types/node": "^16.3.0",
     "@types/pluralize": "^0.0.29",
     "@typescript-eslint/experimental-utils": "^4.28.2",
