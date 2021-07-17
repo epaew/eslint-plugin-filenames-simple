@@ -9,6 +9,7 @@ ruleTester.run('naming-convention', namingConvention, {
     { code: '', filename: 'kebab-case.js' },
     { code: '', filename: 'index.js', options: [{ rule: 'PascalCase' }] },
     { code: '', filename: 'index.js', options: [{ rule: '[a-z]*' }] },
+    { code: '', filename: '.eslintrc.js', options: [{ excepts: ['\..+'] }] },
   ],
   invalid: [
     {
@@ -26,6 +27,11 @@ ruleTester.run('naming-convention', namingConvention, {
       filename: 'camelCase.js',
       options: [{ rule: '[a-z]*' }],
       errors: ["The filename must follow the rule: '[a-z]*'."],
+    },
+    {
+      code: '',
+      filename: '.dotfile',
+      errors: ["The filename must follow the rule: 'kebab-case'."],
     },
   ],
 });
