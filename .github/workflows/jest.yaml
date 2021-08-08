@@ -27,18 +27,9 @@ jobs:
       - uses: actions/setup-node@v2.4.0
         with:
           node-version: ${{ matrix.node }}
-
-      - name: Fetch yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Fetch yarn cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
-          restore-keys: ${{ runner.os }}-yarn-
-
+          cache: yarn
       - run: yarn install --frozen-lockfile
+
       - run: yarn add eslint@${{ matrix.eslint }}
 
       - name: yarn run test && report coverage
@@ -50,3 +41,6 @@ jobs:
           coverageLocations: |
             ${{ github.workspace }}/coverage/lcov.info:lcov
           debug: true
+
+      - name: Reset local changes
+        run: git checkout . && yarn
