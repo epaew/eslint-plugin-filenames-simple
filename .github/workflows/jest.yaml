@@ -33,7 +33,7 @@ jobs:
       - run: yarn add eslint@${{ matrix.eslint }}
 
       - name: yarn run test && report coverage
-        uses: paambaati/codeclimate-action@v2.7.5
+        uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: 03c045faa77d44bb865e441b9507cb2a6ee668a225962491ce40d37d6b297899
         with:
