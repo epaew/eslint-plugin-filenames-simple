@@ -1,10 +1,13 @@
 # Unreleased
 ## Features
+## Bugfixes
+## Others
+
+# 0.7.0
+## Features
 * [#416](https://github.com/epaew/eslint-plugin-filenames-simple/pull/416)
   * Remove support for ESLint 6.x and Node.js < 12.22
   * Add support for ESLint 8.x and Node.js 16.x
-## Bugfixes
-## Others
 
 # 0.6.0
 ## Features
