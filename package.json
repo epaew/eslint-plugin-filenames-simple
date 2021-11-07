@@ -41,9 +41,9 @@
   },
   "devDependencies": {
     "@epaew/eslint-config": "git://github.com/epaew/eslint-config.git#master",
-    "@types/eslint": "^7.28.0",
-    "@types/glob": "^7.1.4",
-    "@types/jest": "^27.0.1",
+    "@types/eslint": "^7.28.2",
+    "@types/glob": "^7.2.0",
+    "@types/jest": "^27.0.2",
     "@types/node": "^16.4.7",
     "@types/pluralize": "^0.0.29",
     "@typescript-eslint/experimental-utils": "^5.3.0",
