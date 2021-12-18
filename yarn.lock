@@ -323,8 +323,8 @@
 
 "@epaew/eslint-config@git://github.com/epaew/eslint-config.git#master":
   version "0.1.0"
-  uid "198a9e19c2d4f55e784c6eeb2a20d222ba6fdbb4"
-  resolved "git://github.com/epaew/eslint-config.git#198a9e19c2d4f55e784c6eeb2a20d222ba6fdbb4"
+  uid "0bc66d1bf402d12331deb9ea1cc4f5a5cb2e192d"
+  resolved "git://github.com/epaew/eslint-config.git#0bc66d1bf402d12331deb9ea1cc4f5a5cb2e192d"
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.3.1"
     "@typescript-eslint/parser" "^5.3.1"
@@ -333,7 +333,7 @@
     eslint-plugin-eslint-comments "^3.2.0"
     eslint-plugin-filenames-simple "^0.7.0"
     eslint-plugin-import "^2.25.3"
-    eslint-plugin-jest "^25.2.4"
+    eslint-plugin-jest "^25.3.0"
     eslint-plugin-node "^11.1.0"
     eslint-plugin-prettier "^4.0.0"
     eslint-plugin-react "^7.27.1"
@@ -1544,7 +1544,7 @@ eslint-plugin-import@^2.25.3:
     resolve "^1.20.0"
     tsconfig-paths "^3.11.0"
 
-eslint-plugin-jest@^25.2.4:
+eslint-plugin-jest@^25.3.0:
   version "25.3.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-25.3.0.tgz#6c04bbf13624a75684a05391a825b58e2e291950"
   integrity sha512-79WQtuBsTN1S8Y9+7euBYwxIOia/k7ykkl9OCBHL3xuww5ecursHy/D8GCIlvzHVWv85gOkS5Kv6Sh7RxOgK1Q==
