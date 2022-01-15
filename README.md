@@ -8,8 +8,8 @@ An ESLint plugin to check filenames with simple configuration.
 This plugin is inspired by [eslint-plugin-filenames](https://github.com/selaux/eslint-plugin-filenames).
 
 ## Requirements
-* [Node.js](https://nodejs.org/en/download/): 10.x, 12.x, 14.x
-* [ESLint](https://eslint.org/): 6.x, 7.x
+* [Node.js](https://nodejs.org/en/download/): 12.x, 14.x, 16.x
+* [ESLint](https://eslint.org/): 7.x, 8.x
 
 ## Getting started
 1. Install ESLint and this plugin via npm/yarn
