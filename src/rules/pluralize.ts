@@ -35,10 +35,8 @@ export const pluralize: Rule.RuleModule = {
     const pluralize = getPluralize(context);
     const rules: Rules = context.options[0] ?? {};
 
-    const correctedName = (name: string, rule?: PluralizeRule) =>
-      rule ? pluralize.correct(name, rule) : name;
-    const isValidName = (name: string, rule?: PluralizeRule) =>
-      rule ? pluralize.isValidName(name, rule) : true;
+    const correctedName = (name: string, rule?: PluralizeRule) => (rule ? pluralize.correct(name, rule) : name);
+    const isValidName = (name: string, rule?: PluralizeRule) => (rule ? pluralize.isValidName(name, rule) : true);
 
     return {
       Program: node => {

@@ -28,16 +28,9 @@ export class Pluralize {
   }
 
   private setDictionaries({ irregular, plural, singular, uncountable }: Dictionaries) {
-    irregular &&
-      irregular.forEach(([singular, plural]) => this.#pluralize.addIrregularRule(singular, plural));
-    plural &&
-      plural.forEach(([plural, singular]) =>
-        this.#pluralize.addPluralRule(new RegExp(plural), singular),
-      );
-    singular &&
-      singular.forEach(([singular, plural]) =>
-        this.#pluralize.addSingularRule(new RegExp(singular), plural),
-      );
+    irregular && irregular.forEach(([singular, plural]) => this.#pluralize.addIrregularRule(singular, plural));
+    plural && plural.forEach(([plural, singular]) => this.#pluralize.addPluralRule(new RegExp(plural), singular));
+    singular && singular.forEach(([singular, plural]) => this.#pluralize.addSingularRule(new RegExp(singular), plural));
     uncountable && uncountable.forEach(this.#pluralize.addUncountableRule);
   }
 }

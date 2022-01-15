@@ -10,22 +10,19 @@ describe('rules/typescript-module-declaration', () => {
     parserOptions: { ecmaVersion: 2015, sourceType: 'module' },
   });
 
-  ruleTester.run(
-    'module declaration with string (without path separator)',
-    typescriptModuleDeclaration,
-    {
-      valid: [
-        {
-          code: `
+  ruleTester.run('module declaration with string (without path separator)', typescriptModuleDeclaration, {
+    valid: [
+      {
+        code: `
             declare module 'espree' {
               export function parse(code: string, options?: any): Node;
             }
           `,
-          filename: 'espree.d.ts',
-        },
-        // https://www.typescriptlang.org/docs/handbook/modules.html#ambient-modules
-        {
-          code: `
+        filename: 'espree.d.ts',
+      },
+      // https://www.typescriptlang.org/docs/handbook/modules.html#ambient-modules
+      {
+        code: `
             declare module "url" {
               export interface Url {
                 protocol?: string;
@@ -46,35 +43,31 @@ describe('rules/typescript-module-declaration', () => {
               export var sep: string;
             }
           `,
-          filename: 'node.d.ts',
-        },
-      ],
-      invalid: [
-        {
-          code: `
+        filename: 'node.d.ts',
+      },
+    ],
+    invalid: [
+      {
+        code: `
             declare module 'espree' {
               export function parse(code: string, options?: any): Node;
             }
           `,
-          filename: 'estree.d.ts',
-          errors: [
-            {
-              messageId: 'invalidFilename',
-              data: { filename: 'espree.d.ts' },
-            },
-          ],
-        },
-      ],
-    },
-  );
+        filename: 'estree.d.ts',
+        errors: [
+          {
+            messageId: 'invalidFilename',
+            data: { filename: 'espree.d.ts' },
+          },
+        ],
+      },
+    ],
+  });
 
-  ruleTester.run(
-    'module declaration with string (with path separator)',
-    typescriptModuleDeclaration,
-    {
-      valid: [
-        {
-          code: `
+  ruleTester.run('module declaration with string (with path separator)', typescriptModuleDeclaration, {
+    valid: [
+      {
+        code: `
             declare module 'dayjs/locale/*' {
               namespace locale {
                 interface Locale extends ILocale {};
@@ -85,64 +78,59 @@ describe('rules/typescript-module-declaration', () => {
               export default locale;
             }
           `,
-          filename: 'dayjs.d.ts',
-        },
-        {
-          code: "declare module 'dayjs/locale/*' {}",
-          filename: 'dayjs-locale.d.ts',
-        },
-        {
-          code: "declare module 'dayjs/locale/*' {}",
-          filename: 'dayjs/locale.d.ts',
-        },
-        {
-          code: "declare module 'dayjs/locale/*' {}",
-          filename: 'dayjs/locale/index.d.ts',
-        },
-      ],
-      invalid: [
-        {
-          code: "declare module 'dayjs/locale/*' {}",
-          filename: 'locale.d.ts',
-          errors: [
-            {
-              messageId: 'invalidFilename',
-              data: { filename: 'dayjs.d.ts' },
-            },
-          ],
-        },
-      ],
-    },
-  );
+        filename: 'dayjs.d.ts',
+      },
+      {
+        code: "declare module 'dayjs/locale/*' {}",
+        filename: 'dayjs-locale.d.ts',
+      },
+      {
+        code: "declare module 'dayjs/locale/*' {}",
+        filename: 'dayjs/locale.d.ts',
+      },
+      {
+        code: "declare module 'dayjs/locale/*' {}",
+        filename: 'dayjs/locale/index.d.ts',
+      },
+    ],
+    invalid: [
+      {
+        code: "declare module 'dayjs/locale/*' {}",
+        filename: 'locale.d.ts',
+        errors: [
+          {
+            messageId: 'invalidFilename',
+            data: { filename: 'dayjs.d.ts' },
+          },
+        ],
+      },
+    ],
+  });
 
-  ruleTester.run(
-    'module declaration with string (with exclamation and wildcard)',
-    typescriptModuleDeclaration,
-    {
-      valid: [
-        // https://www.typescriptlang.org/docs/handbook/modules.html#wildcard-module-declarations
-        {
-          code: `
+  ruleTester.run('module declaration with string (with exclamation and wildcard)', typescriptModuleDeclaration, {
+    valid: [
+      // https://www.typescriptlang.org/docs/handbook/modules.html#wildcard-module-declarations
+      {
+        code: `
             declare module "json!*" {
               const value: any;
               export default value;
             }
           `,
-          filename: 'json.d.ts',
-        },
-        {
-          code: `
+        filename: 'json.d.ts',
+      },
+      {
+        code: `
             declare module "*!text" {
               const content: string;
               export default content;
             }
           `,
-          filename: 'text.d.ts',
-        },
-      ],
-      invalid: [],
-    },
-  );
+        filename: 'text.d.ts',
+      },
+    ],
+    invalid: [],
+  });
 
   ruleTester.run('module declaration with variable', typescriptModuleDeclaration, {
     valid: [

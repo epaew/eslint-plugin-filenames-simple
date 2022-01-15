@@ -47,17 +47,13 @@ ruleTester.run('pluralize', pluralize, {
       code: '',
       filename: 'src/controller/index.js',
       options: [{ parentDir: 'plural' }],
-      errors: [
-        'The filename must follow the pluralize rule. Should rename to controllers/index.js',
-      ],
+      errors: ['The filename must follow the pluralize rule. Should rename to controllers/index.js'],
     },
     {
       code: '',
       filename: 'src/controller/index.js',
       options: [{ file: 'plural' }],
-      errors: [
-        'The filename must follow the pluralize rule. Should rename to controller/indices.js',
-      ],
+      errors: ['The filename must follow the pluralize rule. Should rename to controller/indices.js'],
     },
   ],
 });

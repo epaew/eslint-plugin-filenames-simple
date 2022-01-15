@@ -25,14 +25,19 @@
     "eslint": "eslint .",
     "eslint:fix": "eslint --fix .",
     "link": "yarn link && yarn link eslint-plugin-filenames-simple",
+    "lint": "npm-run-all eslint prettier",
+    "lint:fix": "npm-run-all eslint:fix prettier:fix",
     "unlink": "yarn unlink",
     "prepack": "npm-run-all eslint test clean build",
     "prepare": "npm-run-all clean build link",
+    "prettier": "prettier .",
+    "prettier:fix": "prettier --write .",
     "test": "jest",
     "test:ci": "jest --ci --coverage",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "typecheck": "tsc --noEmit"
   },
+  "prettier": "@epaew/prettier-config",
   "resolutions": {
     "eslint-plugin-filenames-simple": "file:."
   },
@@ -41,6 +46,7 @@
   },
   "devDependencies": {
     "@epaew/eslint-config": "git://github.com/epaew/eslint-config.git#master",
+    "@epaew/prettier-config": "git://github.com/epaew/prettier-config.git#master",
     "@types/eslint": "^8.2.0",
     "@types/glob": "^7.2.0",
     "@types/jest": "^27.4.0",
@@ -52,7 +58,7 @@
     "glob": "^7.2.0",
     "jest": "^27.4.7",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.3.2",
+    "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.1.3",
     "ts-node": "^10.4.0",

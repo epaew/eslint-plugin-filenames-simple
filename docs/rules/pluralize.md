@@ -1,12 +1,12 @@
 # filenames-simple/pluralize
+
 This rule ensures that filenames are plural (or singular).
 
 ## Configuration example
+
 ```json
 {
-  "plugins": [
-    "filenames-simple"
-  ],
+  "plugins": ["filenames-simple"],
   "rules": {
     "filenames-simple/pluralize": [
       "error",
@@ -20,12 +20,16 @@ This rule ensures that filenames are plural (or singular).
 ```
 
 ## Available options
+
 ### rule: (the first option)
+
 Specify one of the following naming conventions for each `parentDir` or `file`.
 
 #### Naming convention presets
-* singular
-* plural
+
+- singular
+- plural
 
 ## See also
-* [settings/pluralize](../settings/pluralize.md)
+
+- [settings/pluralize](../settings/pluralize.md)
