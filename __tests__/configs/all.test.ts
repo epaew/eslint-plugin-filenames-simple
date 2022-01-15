@@ -7,9 +7,7 @@ describe('Config of all must include all available rules', () => {
 
   test(`should include all available rules`, () => {
     fetchAvailableRuleNames().then(availableRuleNames => {
-      expect(
-        availableRuleNames.map(rule => `filenames-simple/${rule}`).every(subject),
-      ).toBeTruthy();
+      expect(availableRuleNames.map(rule => `filenames-simple/${rule}`).every(subject)).toBeTruthy();
     });
   });
 });

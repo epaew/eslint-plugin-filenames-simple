@@ -60,15 +60,11 @@ const fetchFilename = (context: Pick<Rule.RuleContext, 'getFilename'>): [string,
   const [parentDirname, basename] = absolutePath.split(path.sep).slice(-2);
   const [filename, ...extnames] = basename.split('.');
 
-  return [
-    filename === 'index' && parentDirname !== '' ? parentDirname : filename,
-    extnames.join('.'),
-  ];
+  return [filename === 'index' && parentDirname !== '' ? parentDirname : filename, extnames.join('.')];
 };
 
 const getNameToCompare = (name: string) => name.replace(/[-_]/g, '').toLowerCase();
-const isSameName = (name1: string, name2: string): boolean =>
-  getNameToCompare(name1) === getNameToCompare(name2);
+const isSameName = (name1: string, name2: string): boolean => getNameToCompare(name1) === getNameToCompare(name2);
 
 export const namedExport: Rule.RuleModule = {
   meta: {

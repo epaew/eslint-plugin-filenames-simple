@@ -1,39 +1,8 @@
 {
-  "normalCase": [
-    "normalcase",
-    "threeormorewordsincludingnormalcase",
-    "normal0case",
-    "normalcase0"
-  ],
-  "camelCase": [
-    "camelCase",
-    "threeOrMoreWordsIncludingCamelCase",
-    "camel0Case",
-    "camelCase0"
-  ],
-  "kebabCase": [
-    "kebab-case",
-    "three-or-more-words-including-kebab-case",
-    "kebab0-case",
-    "kebab-case0"
-  ],
-  "pascalCase": [
-    "PascalCase",
-    "ThreeOrMoreWordsIncludingPascalCase",
-    "Pascal0Case",
-    "PascalCase0",
-    "ECMAScript"
-  ],
-  "snakeCase": [
-    "snake_case",
-    "three_or_more_words_including_snake_case",
-    "snake0_case",
-    "snake_case0"
-  ],
-  "chaosCase": [
-    "this_Is-A_SampleOfChaos-Case",
-    "ThisIs-1of_the sampleOFChaosCase",
-    "00001",
-    ""
-  ]
+  "normalCase": ["normalcase", "threeormorewordsincludingnormalcase", "normal0case", "normalcase0"],
+  "camelCase": ["camelCase", "threeOrMoreWordsIncludingCamelCase", "camel0Case", "camelCase0"],
+  "kebabCase": ["kebab-case", "three-or-more-words-including-kebab-case", "kebab0-case", "kebab-case0"],
+  "pascalCase": ["PascalCase", "ThreeOrMoreWordsIncludingPascalCase", "Pascal0Case", "PascalCase0", "ECMAScript"],
+  "snakeCase": ["snake_case", "three_or_more_words_including_snake_case", "snake0_case", "snake_case0"],
+  "chaosCase": ["this_Is-A_SampleOfChaos-Case", "ThisIs-1of_the sampleOFChaosCase", "00001", ""]
 }

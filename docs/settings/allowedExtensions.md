@@ -1,12 +1,15 @@
 # filenames-simple/allowedExtensions
+
 Specify the file extensions you want to explicitly allow to use.
 
 ## Acceptable values
+
 - String
   - starts with '.'.
   - consistings of letters, numbers and '.'
 
 ## Default values
+
 - .js
 - .cjs
 - .mjs
@@ -17,11 +20,10 @@ Specify the file extensions you want to explicitly allow to use.
 - .vue
 
 ## Configuration example
+
 ```json
 {
-  "plugins": [
-    "filenames-simple"
-  ],
+  "plugins": ["filenames-simple"],
   "rules": {
     "filenames-simple/extension": "error"
   },

@@ -12,7 +12,7 @@ export class CaseValidator {
     ignorePatterns: RegExp[],
     recommendationBuilder: RecommendationBuilder = () => {
       throw new Error('Not implemented');
-    },
+    }
   ) {
     this.#expression = expression;
     this.#ignorePatterns = ignorePatterns;
@@ -38,6 +38,6 @@ export const getCaseValidator = (ruleName: string, ignorePattern: string[] = [])
   return new CaseValidator(
     expression,
     ignorePattern.map(pattern => new RegExp(`^${pattern}$`)),
-    recommendationBuilder,
+    recommendationBuilder
   );
 };
