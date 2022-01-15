@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@epaew/eslint-config": "git://github.com/epaew/eslint-config.git#master",
+    "@epaew/prettier-config": "git://github.com/epaew/prettier-config.git#master",
     "@types/eslint": "^8.2.0",
     "@types/glob": "^7.2.0",
     "@types/jest": "^27.4.0",
