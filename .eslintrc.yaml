@@ -5,6 +5,7 @@ env:
 extends:
   - '@epaew/eslint-config/node-typescript'
   - plugin:filenames-simple/recommended
+  - prettier
 parserOptions:
   ecmaVersion: 2018
 overrides:
