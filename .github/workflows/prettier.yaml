@@ -1,4 +1,4 @@
-name: Run ESLint
+name: Run Prettier
 
 on:
   pull_request: {}
@@ -7,8 +7,8 @@ on:
       - master
 
 jobs:
-  eslint:
-    name: ESLint
+  prettier:
+    name: Prettier
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,4 +17,4 @@ jobs:
           node-version: 16.x
           cache: yarn
       - run: yarn install --frozen-lockfile
-      - run: yarn eslint
+      - run: yarn prettier
