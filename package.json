@@ -25,14 +25,19 @@
     "eslint": "eslint .",
     "eslint:fix": "eslint --fix .",
     "link": "yarn link && yarn link eslint-plugin-filenames-simple",
+    "lint": "npm-run-all eslint prettier",
+    "lint:fix": "npm-run-all eslint:fix prettier:fix",
     "unlink": "yarn unlink",
     "prepack": "npm-run-all eslint test clean build",
     "prepare": "npm-run-all clean build link",
+    "prettier": "prettier .",
+    "prettier:fix": "prettier --write .",
     "test": "jest",
     "test:ci": "jest --ci --coverage",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "typecheck": "tsc --noEmit"
   },
+  "prettier": "@epaew/prettier-config",
   "resolutions": {
     "eslint-plugin-filenames-simple": "file:."
   },
