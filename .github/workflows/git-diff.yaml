@@ -13,7 +13,7 @@ jobs:
     outputs:
       result: ${{ steps.changed-files.outputs.diff }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Fetch base branch
         run: git fetch --prune --depth=1 origin ${{ github.base_ref }}
 
@@ -36,7 +36,7 @@ jobs:
           - target: docs/rules/.*
             when: ${{ contains(needs.list-diff.outputs.result, 'src/rules') }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         if: ${{ matrix.when }}
       - name: Fetch base branch
         if: ${{ matrix.when }}
