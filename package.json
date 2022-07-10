@@ -47,23 +47,23 @@
   "devDependencies": {
     "@epaew/eslint-config": "https://github.com/epaew/eslint-config.git#master",
     "@epaew/prettier-config": "https://github.com/epaew/prettier-config.git#master",
-    "@types/eslint": "^8.4.3",
+    "@types/eslint": "^8.4.5",
     "@types/glob": "^7.2.0",
-    "@types/jest": "^28.1.1",
-    "@types/node": "^17.0.41",
+    "@types/jest": "^28.1.4",
+    "@types/node": "^18.0.3",
     "@types/pluralize": "^0.0.29",
-    "@typescript-eslint/experimental-utils": "^5.27.1",
-    "eslint": "^8.17.0",
+    "@typescript-eslint/experimental-utils": "^5.30.5",
+    "eslint": "^8.19.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-filenames-simple": "file:.",
     "glob": "^8.0.3",
-    "jest": "^28.1.1",
+    "jest": "^28.1.2",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.6.2",
+    "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
-    "ts-jest": "^28.0.4",
-    "ts-node": "^10.8.1",
-    "typescript": "^4.7.3"
+    "ts-jest": "^28.0.5",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
   },
   "peerDependencies": {
     "eslint": ">=7.0.0 <9.0.0"
