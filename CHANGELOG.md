@@ -8,6 +8,8 @@
 
 - [#465](https://github.com/epaew/eslint-plugin-filenames-simple/pull/465)
   - Update prettier configuration.
+- [#598](https://github.com/epaew/eslint-plugin-filenames-simple/pull/598)
+  - Upgrade some dependencies
 
 # 0.7.0
 
