@@ -2,11 +2,17 @@
 
 ## Features
 
+## Bugfixes
+
+## Others
+
+# 0.8.0
+
+## Features
+
 - [#600](https://github.com/epaew/eslint-plugin-filenames-simple/pull/600)
   - Remove support Node.js < 14.17
   - Add support for Node.js 18.x
-
-## Bugfixes
 
 ## Others
 
