@@ -2,7 +2,7 @@
 
 ## Features
 
-- [#599](https://github.com/epaew/eslint-plugin-filenames-simple/pull/599)
+- [#600](https://github.com/epaew/eslint-plugin-filenames-simple/pull/600)
   - Remove support Node.js < 14.17
   - Add support for Node.js 18.x
 
@@ -13,6 +13,7 @@
 - [#465](https://github.com/epaew/eslint-plugin-filenames-simple/pull/465)
   - Update prettier configuration.
 - [#598](https://github.com/epaew/eslint-plugin-filenames-simple/pull/598)
+- [#601](https://github.com/epaew/eslint-plugin-filenames-simple/pull/601)
   - Upgrade some dependencies
 
 # 0.7.0
