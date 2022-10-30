@@ -20,8 +20,7 @@ jobs:
       - name: Fetch changed file names
         id: changed-files
         run: |
-          echo "::set-output name=diff::" \
-            "$(git diff --diff-filter=d --name-only origin/${{ github.base_ref }} | tr '\n' ' ')"
+          echo "diff=$(git diff --diff-filter=d --name-only origin/${{ github.base_ref }} | tr '\n' ' ')" >> $GITHUB_OUTPUT
 
   check-files-included:
     name: Check ${{ matrix.target }} is/are changed
