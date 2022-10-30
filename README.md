@@ -10,7 +10,7 @@ This plugin is inspired by [eslint-plugin-filenames](https://github.com/selaux/e
 
 ## Requirements
 
-- [Node.js](https://nodejs.org/en/download/): 12.x, 14.x, 16.x
+- [Node.js](https://nodejs.org/en/download/): 14.x, 16.x, 18.x
 - [ESLint](https://eslint.org/): 7.x, 8.x
 
 ## Getting started
