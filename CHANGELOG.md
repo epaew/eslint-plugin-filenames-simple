@@ -6,6 +6,9 @@
 
 ## Others
 
+- [#603](https://github.com/epaew/eslint-plugin-filenames-simple/pull/603)
+  - Fix type error caused by https://github.com/typescript-eslint/typescript-eslint/pull/5386
+
 # 0.8.0
 
 ## Features

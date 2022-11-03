@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { TSESLint, TSESTree } from '@typescript-eslint/experimental-utils';
+import { TSESLint, TSESTree } from '@typescript-eslint/utils';
 import { Rule } from 'eslint';
 
 const compareFilenameAndModuleName = (filename: string, moduleName: string): boolean =>
@@ -23,6 +23,7 @@ export const typescriptModuleDeclaration: TSESLint.RuleModule<'invalidFilename',
     },
     schema: [],
   },
+  defaultOptions: [],
   create: context => {
     const moduleIdentifiers = new Set<TSESTree.Identifier | TSESTree.Literal>();
 
