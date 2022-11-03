@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { TSESLint } from '@typescript-eslint/experimental-utils';
+import { TSESLint } from '@typescript-eslint/utils';
 
 import { typescriptModuleDeclaration } from '#/rules/typescript-module-declaration';
 

@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { TSESTree } from '@typescript-eslint/experimental-utils';
+import { TSESTree } from '@typescript-eslint/utils';
 import { Rule } from 'eslint';
 import { ExportNamedDeclaration, Identifier } from 'estree';
 
