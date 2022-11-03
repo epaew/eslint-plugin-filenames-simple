@@ -23,6 +23,7 @@ export const typescriptModuleDeclaration: TSESLint.RuleModule<'invalidFilename',
     },
     schema: [],
   },
+  defaultOptions: [],
   create: context => {
     const moduleIdentifiers = new Set<TSESTree.Identifier | TSESTree.Literal>();
 
