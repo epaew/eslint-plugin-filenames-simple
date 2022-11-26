@@ -300,7 +300,8 @@
 
 "@epaew/eslint-config@https://github.com/epaew/eslint-config.git#master":
   version "0.1.0"
-  resolved "https://github.com/epaew/eslint-config.git#e2599048aed6e1bc008d7ae38a4e13be68a53491"
+  uid bcf98c7c551e477ba194671223f4524edef3b5fd
+  resolved "https://github.com/epaew/eslint-config.git#bcf98c7c551e477ba194671223f4524edef3b5fd"
 
 "@epaew/prettier-config@https://github.com/epaew/prettier-config.git#master":
   version "0.1.0"
