@@ -10,7 +10,8 @@ This plugin is inspired by [eslint-plugin-filenames](https://github.com/selaux/e
 
 ## Requirements
 
-- [Node.js](https://nodejs.org/en/download/): 14.x, 16.x, 18.x
+- [Node.js](https://nodejs.org/en/download/): >= 14.17
+    - Unstable versions of Node.js are not actively supported.
 - [ESLint](https://eslint.org/): 7.x, 8.x
 
 ## Getting started
