@@ -6,6 +6,17 @@
 
 ## Others
 
+# 0.9.0
+
+## Features
+
+- [#675](https://github.com/epaew/eslint-plugin-filenames-simple/pull/675)
+  - Update package.json - work with Node.js v20 (or later)
+
+## Bugfixes
+
+## Others
+
 - [#603](https://github.com/epaew/eslint-plugin-filenames-simple/pull/603)
   - Fix type error caused by https://github.com/typescript-eslint/typescript-eslint/pull/5386
 
