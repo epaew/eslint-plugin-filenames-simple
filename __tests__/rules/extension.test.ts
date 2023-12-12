@@ -48,7 +48,10 @@ describe('rules/extension', () => {
           errors: [
             {
               messageId: 'invalidExtension',
-              data: { extensions: '.js,.cjs,.mjs,.jsx,.d.ts,.ts,.tsx,.vue' },
+              data: {
+                extensions:
+                  '.js,.cjs,.mjs,.jsx,.d.ts,.ts,.tsx,.vue,.spec.js,.spec.jsx,.spec.ts,.spec.tsx,.test.js,.test.jsx,.test.ts,.test.tsx',
+              },
             },
           ],
         },
